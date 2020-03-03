@@ -1,0 +1,28 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+
+%opening
+\title{Identifying trends on Twitter}
+\author{José Vidal Cardona Rosas\\Monserrat Esperanza Alvaréz}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+    Currently, we have the power of social media for communication in real time
+    and the principal use is communication. 
+    But we can give a second use all this tools on different fields like e-commerce, 
+    political, sales, etc. Twitter is a network of networks and the people share 
+    "Tuits" with things about their day a day with some data, data about food,
+    drinks, clothes, feelings, opinions, etc. Sometimes used "hashtags" for describe
+    the "Tuit". So we can do  Web scraping for get this different kinds data, 
+    clean the data and processing the data and finally try to identify a trend.
+\end{abstract}
+
+\section{General objectives}
+    \begin{itemize}
+        \item Identify possible trends
+        \item Identify groups of people with similar interests
+        \item Identify the principal topics from a group
+    \end{itemize}
+
+\end{document}
