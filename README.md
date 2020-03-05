@@ -12,8 +12,14 @@ Monserrat Esperanza Alvaréz & José Vidal Cardona Rosas
     the "Tuit". So we can do  Web scraping for get this different kinds data, 
     clean the data and processing the data and finally try to identify a trend.
 #### General objectives
-      * Identify possible trends
-      * Identify groups of people with similar interests
-      * Identify the principal topics from a group
+* Identify possible trends
+* Identify groups of people with similar interests
+* Identify the principal topics from a group
+      
+### Software Tools
+* Twitter API
+* Pandas Library
+* Matplotlib Library
+* Seaborn Library
 
 
