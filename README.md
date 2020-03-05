@@ -16,7 +16,7 @@ Monserrat Esperanza Alvaréz & José Vidal Cardona Rosas
 * Identify groups of people with similar interests
 * Identify the principal topics from a group
       
-### Software Tools
+#### Software Tools
 * Twitter API
 * Pandas Library
 * Matplotlib Library
