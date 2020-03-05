@@ -11,6 +11,7 @@ Monserrat Esperanza Alvaréz & José Vidal Cardona Rosas
     drinks, clothes, feelings, opinions, etc. Sometimes used "hashtags" for describe
     the "Tuit". So we can do  Web scraping for get this different kinds data, 
     clean the data and processing the data and finally try to identify a trend.
+    
 #### General objectives
 * Identify possible trends
 * Identify groups of people with similar interests
