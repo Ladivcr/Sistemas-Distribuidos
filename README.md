@@ -13,9 +13,7 @@ Monserrat Esperanza Alvaréz & José Vidal Cardona Rosas
     clean the data and processing the data and finally try to identify a trend.
     
 #### General objectives
-* Identify possible trends
-* Identify groups of people with similar interests
-* Identify the principal topics from a group
+* Identify possible trends Latin America
       
 #### Software Tools
 * Twitter API
