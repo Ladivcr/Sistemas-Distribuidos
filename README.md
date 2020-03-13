@@ -21,5 +21,11 @@ Monserrat Esperanza Alvaréz & José Vidal Cardona Rosas
 * Matplotlib Library
 * Seaborn Library
 
-### Data Source
+#### Data Source
 * Twitter
+
+#### General architecture of the system
+* Data source:
+* Storage system:
+* Processing system
+* Data visualization
