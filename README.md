@@ -25,7 +25,7 @@ Monserrat Esperanza Alvaréz & José Vidal Cardona Rosas
 * Twitter
 
 #### General architecture of the system
-* Data source:
-* Storage system:
-* Processing system
-* Data visualization
+* Data source: Twitter
+* Storage system: Mysql
+* Processing system: Python and Tweepy
+* Data visualization: HTML5, Pyplot and other different tools for data visualization
