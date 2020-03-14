@@ -60,7 +60,11 @@ if this tweets were real, so, we used a twitter account and tweet something
 with a key word.
 ## Results
 ![tuit](resources/tuit.png)
+![code](resources/code.png)
+As we can see, our code works and this check our tests
 
 ## Conclusions
+Our project is not over yet
+
 ## Bibliography
 We can did it with helped from [documentation](https://tweepy.readthedocs.io/en/v3.5.0/index.html#)
