@@ -54,6 +54,13 @@ GNU General Public License v3.0
 Extreme programming 
 
 ## Implementation and tests
+We ran our code for get some tweets with filter per words
+and we had lucky because we could catch some tweets but, we didn't know
+if this tweets were real, so, we used a twitter account and tweet something
+with a key word.
 ## Results
+![tuit](resources/tuit.png)
+
 ## Conclusions
 ## Bibliography
+We can did it with helped from [documentation](https://tweepy.readthedocs.io/en/v3.5.0/index.html#)
