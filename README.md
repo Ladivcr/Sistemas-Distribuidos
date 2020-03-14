@@ -50,3 +50,10 @@ GNU General Public License v3.0
     the "Tuit". So we can do  Web scraping for get this different kinds data, 
     clean the data and processing the data and finally try to identify a trend.
 
+## Methodology
+Extreme programming 
+
+## Implementation and tests
+## Results
+## Conclusions
+## Bibliography
