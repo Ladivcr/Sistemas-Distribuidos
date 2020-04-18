@@ -7,8 +7,17 @@ import datetime
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
+import time
 
+# Tiempo para el control de la recepción de tuits (esta en segundos)
+start_time = time.time() 
 
+# Diccionario para controlar el número de hashtags
+hashtags = {}
+# Lista para guardar el tiempo en el que el tuit fue publicado
+time_vector = []
+# Lista para obtener el total de tuits
+tag_vector = []
 
 # Cargamos las credenciales
 with open('credentials.json') as file:
@@ -33,65 +42,66 @@ except:
 
 # Creamos una clase para monitorear los tuits
 class TweetsListener(tweepy.StreamListener):
+    
     # Efectuamos la conexión
     def on_connect(self):
         print("Conexión exitosa!")
+        
+    
 
-    # Recibimos los tuits
+    # Método para recibir los tuits
     def on_status(self, status):
-        print("\nTweets: {0}\nHashtags: {1}\nId user: {2}\nName user: {3}\
-              \n@ User: {4}\nProfile description: {5}\nLocation: {6}\
-              \n# Followers: {7}\nTotal profile tweets: {8}\nPublication date: {9}"
-              .format(status.text, status.entities["hashtags"], status.user.id_str, status.user.name, status.user.screen_name, status.user.description, 
-                      status.coordinates, status.user.followers_count, status.user.statuses_count, status.created_at))
-              
-        publication_date = str(status.created_at)
-        #print(type(publication_date))
-        #mytime = datetime.datetime.strptime(publication_date, '%Y-%m-%d %H:%M:%S')
-        #print(type(mytime))
-        response = {"hashtags":status.entities["hashtags"], "coordinates":status.coordinates,"publication_date":publication_date}
+        #print(start_time)
+        #print(status.text) # Texto del tuit
+        publication_date = str(status.created_at) # Convertimos el tipo de dato de la fecha en string
+        response = {"hashtags":status.entities["hashtags"], "publication_date":publication_date, "coordinates":status.coordinates}
+        
         
         # Convertimos los atributos con los que vamos a trabajar en un dato del tipo JSON
         data = json.dumps(response)
         
         # Cargamos los datos ahora como un tipo de dato JSON
         data = json.loads(data)
-        tags = {}
-        time_vector = []
-        tag_vector = []
-        for item in data.items():
-            #print(item)
-            if item[0] == "hashtags":
-                for tag in item[1]:
-                    if (tag in tags) == True: 
-                        tags[tag] += 1
-                    else: 
-                        tags[tag] = 0
-                    
-            if item[0] == "publication_date":
-                #print(type(item[1]))
-                mytime = datetime.datetime.strptime(item[1], '%Y-%m-%d %H:%M:%S')
-                #print(type(mytime))
-                try:
-                    time_vector.append(mytime)
-                    tag_vector.append(max(tags.values()))
-                except ValueError:
-                    time_vector.append(mytime)
-                    tag_vector.append(0)
-        # Graficar
-        fig, ax = plt.subplots()
-        ax.plot(time_vector, tag_vector)
-        ax.set(xlabel='time', ylabel='trends', title='trends')
-        ax.grid()
-        #plt.ylim(1e-9, 1e-2)
-        #plt.yscale("log")
-        fig.savefig("/trends.png")
-        plt.show()
-
-                
+       
+        hasht = list(data["hashtags"]) #Obtenemos los hashtags del tuit
+        if len(hasht) != 0:
+            print(status.text)
+            for dicci in hasht: 
+                tag = dicci["text"]
+                tag = tag.lower()
+                #print(tag)
+                if (tag in hashtags.keys()) == True:
+                    hashtags[tag] += 1
+                else: 
+                    #print("entre")
+                    hashtags[tag] = 0
+                    date = data["publication_date"] # obtener la fecha
+                    print(date)
+                    date = date.split(" ")
+                    hour = date[1]
+                    today = date[0]
+                    time_vector.append(hour)
+        
+        
+        elapsed_time = time.time() - start_time # Obtenemos el tiempo transcurrido
+        elapsed_time_seg = int(elapsed_time) # Obtenemos los segundos
+        
+        if elapsed_time_seg == 120:
+            time_tag = list(hashtags.values())
+            #print(time_vector, time_tag)
+            # Graficar
+            fig, ax = plt.subplots()
+            ax.plot(time_vector, time_tag, "or")
+            ax.set(xlabel='time(seg)', ylabel='number of tweets', title=datetime.date.today())
+            ax.grid()
+            plt.ylim(0, 10)
+            plt.yscale("linear")
+            #fig.savefig("/trends.png")
+            plt.show()
+            print(hashtags)
+        
                 
             
-        
         
     # Estatus de la conexión
     def on_error(self, status_code):
@@ -107,7 +117,7 @@ streamingApi = tweepy.Stream(auth=api.auth, listener=stream)
 # Filtramos los datos
 
 # Coordenanas de toda latinoamerica
-#streamingApi.filter(locations=[-120.5752312537,11.5864357452,-85.4274408173,34.9875682623]) 
+streamingApi.filter(locations=[-122.403460741,14.1246876254,-87.9942810535,32.5735192771]) 
 
 # Obtener tuits mediante palabras clave
-tuits = streamingApi.filter(track = ["México"])
+#tuits = streamingApi.filter(track = ["ladiv", "Ladiv", "vidale", "Vidale"])
