@@ -16,7 +16,7 @@ start_time = time.time()
 hashtags = {}
 # Lista para guardar el tiempo en el que el tuit fue publicado
 time_vector = []
-# Lista para obtener el total de tuits
+# Lista para guardar los hashtags
 tag_vector = []
 
 # Cargamos las credenciales
@@ -64,6 +64,7 @@ class TweetsListener(tweepy.StreamListener):
         data = json.loads(data)
        
         hasht = list(data["hashtags"]) #Obtenemos los hashtags del tuit
+        # Hacemos un recorrido por los hashtags y comparamos con nuestro diccionario de hashtags
         if len(hasht) != 0:
             print(status.text)
             for dicci in hasht: 
@@ -76,30 +77,59 @@ class TweetsListener(tweepy.StreamListener):
                     #print("entre")
                     hashtags[tag] = 0
                     date = data["publication_date"] # obtener la fecha
-                    print(date)
+                    #print(date)
                     date = date.split(" ")
                     hour = date[1]
                     today = date[0]
                     time_vector.append(hour)
+                    tag_vector.append(tag)
         
+        
+    
+        
+                
         
         elapsed_time = time.time() - start_time # Obtenemos el tiempo transcurrido
         elapsed_time_seg = int(elapsed_time) # Obtenemos los segundos
         
         if elapsed_time_seg == 120:
-            time_tag = list(hashtags.values())
-            #print(time_vector, time_tag)
+            # Para no estar generando gráficas que no nos aporten nuevo conocimiento, 
+            # nos limitaremos a generar graficas con los hashtags que logren pasar
+            # o igualar el umbral para considerar "posible tendencía"
+        
+            arr_de_etiquetas = [] # Arrreglo de etiquetas para graficar
+            arr_de_valores = [] # arreglo de valores para graficar
+            for clave, valor in hashtags.items():
+                if valor >= 2: 
+                    arr_de_etiquetas.append(clave)
+                    arr_de_valores.append(valor)
+                else:
+                    sys.exit()
+            
+            #   num_tag = list(hashtags.values())
+            #   print(num_tag, tag_vector)
+            #plt.scatter(num_tag, tag_vector)
             # Graficar
             fig, ax = plt.subplots()
-            ax.plot(time_vector, time_tag, "or")
-            ax.set(xlabel='time(seg)', ylabel='number of tweets', title=datetime.date.today())
+            #ax.plot(tag_vector, num_tag, "or")
+            ax.set(xlabel='number of tweets',  title=datetime.date.today())
             ax.grid()
-            plt.ylim(0, 10)
-            plt.yscale("linear")
-            #fig.savefig("/trends.png")
+            # Establecer el tamaño de los ejes
+            #plt.ylim(0, len(tag_vector))
+            #plt.yscale("linear")
+            #   plt.bar(num_tag, tag_vector, color="r", align="center")
+            plt.bar(arr_de_etiquetas, arr_de_valores, color="r", align="center")
+            plt.xlim(0,max(arr_de_valores)+2)
+            plt.xscale("linear")
+            
+            # Etiquetar los puntos
+            #ids = tag_vector
+            #for i, txt in enumerate(ids): 
+                #plt.annotate(str(txt), (tag_vector[i], num_tag[i]))
+                #plt.legend(str(txt), (tag_vector[i], num_tag[i]))
+                             
             plt.show()
-            print(hashtags)
-        
+          
                 
             
         
@@ -116,7 +146,7 @@ streamingApi = tweepy.Stream(auth=api.auth, listener=stream)
 
 # Filtramos los datos
 
-# Coordenanas de toda latinoamerica
+# Coordenanas de todo México
 streamingApi.filter(locations=[-122.403460741,14.1246876254,-87.9942810535,32.5735192771]) 
 
 # Obtener tuits mediante palabras clave
