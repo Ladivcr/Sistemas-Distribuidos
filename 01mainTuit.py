@@ -75,7 +75,7 @@ class TweetsListener(tweepy.StreamListener):
                     hashtags[tag] += 1
                 else: 
                     #print("entre")
-                    hashtags[tag] = 0
+                    hashtags[tag] = 1
                     date = data["publication_date"] # obtener la fecha
                     #print(date)
                     date = date.split(" ")
@@ -88,47 +88,57 @@ class TweetsListener(tweepy.StreamListener):
     
         
                 
-        
         elapsed_time = time.time() - start_time # Obtenemos el tiempo transcurrido
         elapsed_time_seg = int(elapsed_time) # Obtenemos los segundos
         
-        if elapsed_time_seg == 120:
+        if elapsed_time_seg == 1000:
             # Para no estar generando gráficas que no nos aporten nuevo conocimiento, 
             # nos limitaremos a generar graficas con los hashtags que logren pasar
             # o igualar el umbral para considerar "posible tendencía"
         
-            arr_de_etiquetas = [] # Arrreglo de etiquetas para graficar
+            arr_de_etiquetas = [] # Arrreglo de etiquetas para graficar nombramiento de puntos
             arr_de_valores = [] # arreglo de valores para graficar
-            for clave, valor in hashtags.items():
-                if valor >= 2: 
+            for clave in hashtags.keys():
+                
+                if hashtags[clave] >= 40: 
                     arr_de_etiquetas.append(clave)
-                    arr_de_valores.append(valor)
-                else:
-                    sys.exit()
+                    arr_de_valores.append(hashtags[clave])
+                #else:
+                    #print(max(hashtags.values()))
+                    #sys.exit()
+            arr_temp = [int(i) for i in range(len(arr_de_etiquetas))] # arreglo temporal para el eje x 
             
-            #   num_tag = list(hashtags.values())
-            #   print(num_tag, tag_vector)
-            #plt.scatter(num_tag, tag_vector)
             # Graficar
             fig, ax = plt.subplots()
-            #ax.plot(tag_vector, num_tag, "or")
-            ax.set(xlabel='number of tweets',  title=datetime.date.today())
+            now = datetime.datetime.now()
+            actual_date = now.strftime('Day :%d, Month: %m, Year: %Y, Hour: %H, Minutes: %M, Seconds: %S')
+            #ax.set_title(datetime.date.today())
+            ax.set_title(actual_date)
+            ax.set_xlabel("Tags")
+            ax.set_ylabel("Number of tweets")
+            font = {'family' : 'normal', 'weight' : 'normal', 'size'   : 8}
+         
+            ax.plot(arr_temp, arr_de_valores, "-or")
+            
+            #ax.set_xticklabels(arr_de_etiquetas, font, rotation=90)
             ax.grid()
+            
             # Establecer el tamaño de los ejes
-            #plt.ylim(0, len(tag_vector))
-            #plt.yscale("linear")
-            #   plt.bar(num_tag, tag_vector, color="r", align="center")
-            plt.bar(arr_de_etiquetas, arr_de_valores, color="r", align="center")
-            plt.xlim(0,max(arr_de_valores)+2)
-            plt.xscale("linear")
+            plt.ylim(0, max(arr_de_valores))
+            plt.yscale("linear")
             
             # Etiquetar los puntos
-            #ids = tag_vector
-            #for i, txt in enumerate(ids): 
-                #plt.annotate(str(txt), (tag_vector[i], num_tag[i]))
-                #plt.legend(str(txt), (tag_vector[i], num_tag[i]))
-                             
+            ids = arr_de_etiquetas
+            for i, txt in enumerate(ids): 
+                plt.annotate(str(txt), (arr_temp[i], arr_de_valores[i]))
+            
+            
+            # Guardamos la gráfica 
+            #plt.savefig("posiblesTendencias.png", bbox_inches='tight')
             plt.show()
+           
+            
+        
           
                 
             
