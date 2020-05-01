@@ -91,7 +91,7 @@ class TweetsListener(tweepy.StreamListener):
         elapsed_time = time.time() - start_time # Obtenemos el tiempo transcurrido
         elapsed_time_seg = int(elapsed_time) # Obtenemos los segundos
         
-        if elapsed_time_seg == 1000:
+        if elapsed_time_seg == 2800:
             # Para no estar generando gráficas que no nos aporten nuevo conocimiento, 
             # nos limitaremos a generar graficas con los hashtags que logren pasar
             # o igualar el umbral para considerar "posible tendencía"
@@ -100,7 +100,7 @@ class TweetsListener(tweepy.StreamListener):
             arr_de_valores = [] # arreglo de valores para graficar
             for clave in hashtags.keys():
                 
-                if hashtags[clave] >= 40: 
+                if hashtags[clave] >= 50: 
                     arr_de_etiquetas.append(clave)
                     arr_de_valores.append(hashtags[clave])
                 #else:
@@ -124,7 +124,7 @@ class TweetsListener(tweepy.StreamListener):
             ax.grid()
             
             # Establecer el tamaño de los ejes
-            plt.ylim(0, max(arr_de_valores))
+            plt.ylim(0, max(arr_de_valores)+5)
             plt.yscale("linear")
             
             # Etiquetar los puntos
@@ -134,13 +134,13 @@ class TweetsListener(tweepy.StreamListener):
             
             
             # Guardamos la gráfica 
-            #plt.savefig("posiblesTendencias.png", bbox_inches='tight')
+            today = datetime.datetime.now()
+            #día-mes-año - horas-minutos-segundos
+            actual_day = now.strftime('%d-%m-%Y-%H-%M-%S.png')
+            plt.savefig(actual_day, bbox_inches='tight')
             plt.show()
-           
             
-        
-          
-                
+           
             
         
     # Estatus de la conexión
@@ -160,4 +160,4 @@ streamingApi = tweepy.Stream(auth=api.auth, listener=stream)
 streamingApi.filter(locations=[-122.403460741,14.1246876254,-87.9942810535,32.5735192771]) 
 
 # Obtener tuits mediante palabras clave
-#tuits = streamingApi.filter(track = ["ladiv", "Ladiv", "vidale", "Vidale"])
+#tuits = streamingApi.filter(track = [])
