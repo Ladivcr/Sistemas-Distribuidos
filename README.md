@@ -33,7 +33,7 @@ GNU General Public License v3.0
 > You will need to use some credencial from API Twitter, If you have it you can put it your credencial in the code. 
 > If you don't have credencial, I will send my credencial in an Email (Just if you are my teacher or his assistant) 
 * Open a terminal 
-* Write: python3 extracttuit.py 
+* Write: python3 01mainTuit.py 
 > In this step, you should have already put your credentials in the code
 * Press Enter
 
