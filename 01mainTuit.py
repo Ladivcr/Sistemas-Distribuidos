@@ -91,7 +91,7 @@ class TweetsListener(tweepy.StreamListener):
         elapsed_time = time.time() - start_time # Obtenemos el tiempo transcurrido
         elapsed_time_seg = int(elapsed_time) # Obtenemos los segundos
         
-        if elapsed_time_seg == 2800:
+        if elapsed_time_seg == 1800:
             # Para no estar generando gráficas que no nos aporten nuevo conocimiento, 
             # nos limitaremos a generar graficas con los hashtags que logren pasar
             # o igualar el umbral para considerar "posible tendencía"
@@ -108,6 +108,8 @@ class TweetsListener(tweepy.StreamListener):
                     #sys.exit()
             arr_temp = [int(i) for i in range(len(arr_de_etiquetas))] # arreglo temporal para el eje x 
             
+            
+            
             # Graficar
             fig, ax = plt.subplots()
             now = datetime.datetime.now()
@@ -120,7 +122,6 @@ class TweetsListener(tweepy.StreamListener):
          
             ax.plot(arr_temp, arr_de_valores, "-or")
             
-            #ax.set_xticklabels(arr_de_etiquetas, font, rotation=90)
             ax.grid()
             
             # Establecer el tamaño de los ejes
@@ -128,15 +129,18 @@ class TweetsListener(tweepy.StreamListener):
             plt.yscale("linear")
             
             # Etiquetar los puntos
-            ids = arr_de_etiquetas
-            for i, txt in enumerate(ids): 
-                plt.annotate(str(txt), (arr_temp[i], arr_de_valores[i]))
-            
+            for label, x, y in zip(arr_de_etiquetas, arr_temp, arr_de_valores):
+                plt.annotate(label, xy=(x, y), xytext=(-15, 15),
+                textcoords='offset points', ha='right', va='bottom',
+                bbox=dict(boxstyle='round,pad=0.5', fc='yellow', alpha=0.5),
+                arrowprops=dict(arrowstyle = '->', connectionstyle='arc3,rad=0'))
+                
+         
             
             # Guardamos la gráfica 
             today = datetime.datetime.now()
             #día-mes-año - horas-minutos-segundos
-            actual_day = now.strftime('%d-%m-%Y-%H-%M-%S.png')
+            actual_day = now.strftime('graphics/%d-%m-%Y-%H-%M-%S.png')
             plt.savefig(actual_day, bbox_inches='tight')
             plt.show()
             
