@@ -8,6 +8,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 import time
+import subprocess
+
 
 # Tiempo para el control de la recepción de tuits (esta en segundos)
 start_time = time.time() 
@@ -72,12 +74,13 @@ class TweetsListener(tweepy.StreamListener):
                 tag = tag.lower()
                 #print(tag)
                 if (tag in hashtags.keys()) == True:
-                    hashtags[tag] += 1
+                    hashtags[tag][0] += 1
                 else: 
                     #print("entre")
-                    hashtags[tag] = 1
+                    
                     date = data["publication_date"] # obtener la fecha
                     #print(date)
+                    hashtags[tag] = [1, date]
                     date = date.split(" ")
                     hour = date[1]
                     today = date[0]
@@ -87,22 +90,36 @@ class TweetsListener(tweepy.StreamListener):
         
     
         
-                
+            
         elapsed_time = time.time() - start_time # Obtenemos el tiempo transcurrido
         elapsed_time_seg = int(elapsed_time) # Obtenemos los segundos
         
-        if elapsed_time_seg == 1800:
+        # Guardaremos los datos cada 10 minutos
+        if elapsed_time_seg == 600:
+            # Guardar los tuits 
+            myJSON = json.dumps(hashtags)
+            now = datetime.datetime.now()
+            #día-mes-año - horas-minutos-segundos
+            filename = now.strftime('tweets/possible_trend-%d-%m-%Y-%H-%M-%S.json')
+            # Guardamos nuestros datos en un archivo json
+            with open(filename,"w") as file:
+                file.write(myJSON)
+            
+            #Para guardar una copia de los datos
+            #output = subprocess.run(["cp",filename,"json/backup/"])
+        
             # Para no estar generando gráficas que no nos aporten nuevo conocimiento, 
             # nos limitaremos a generar graficas con los hashtags que logren pasar
             # o igualar el umbral para considerar "posible tendencía"
         
+            """
             arr_de_etiquetas = [] # Arrreglo de etiquetas para graficar nombramiento de puntos
             arr_de_valores = [] # arreglo de valores para graficar
             for clave in hashtags.keys():
                 
-                if hashtags[clave] >= 50: 
+                if hashtags[clave][0] >= 50: 
                     arr_de_etiquetas.append(clave)
-                    arr_de_valores.append(hashtags[clave])
+                    arr_de_valores.append(hashtags[clave][0])
                 #else:
                     #print(max(hashtags.values()))
                     #sys.exit()
@@ -138,12 +155,12 @@ class TweetsListener(tweepy.StreamListener):
          
             
             # Guardamos la gráfica 
-            today = datetime.datetime.now()
+            #today = datetime.datetime.now()
             #día-mes-año - horas-minutos-segundos
-            actual_day = now.strftime('graphics/%d-%m-%Y-%H-%M-%S.png')
-            plt.savefig(actual_day, bbox_inches='tight')
+            #actual_day = now.strftime('graphics/%d-%m-%Y-%H-%M-%S.png')
+            #plt.savefig(actual_day, bbox_inches='tight')
             plt.show()
-            
+            """
            
             
         
