@@ -2,17 +2,22 @@
 import mysql.connector
 from mysql.connector import errorcode
 import json
-import glob, os
+import glob
+import os
 import xml.etree.ElementTree as ET
 import mysql.connector
 from mysql.connector import errorcode
 import datetime
 import subprocess
+import fnmatch
 
 
 
 #PATH = '/home/galimatias/public_html/static/'
-
+#PATH de trabajo
+PATH='/home/ladiv/git/Sistemas-Distribuidos/tweets'
+#PATH para respaldo
+RPATH = '/home/ladiv/git/Sistemas-Distribuidos/json/backup'
 # Cargamos las credenciales
 with open('credentialsDB.json') as file:
     credentials = json.load(file)
@@ -27,10 +32,24 @@ nameDB = credentials["credentials"][0]["database"]
 
 try:
   cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
-  print("Conexión exitosa!")
+  print("Conexión exitosa!\n")
+  cursor = cnx.cursor()
+  query = ("INSERT INTO possible_trends(hashtag, quantity, publication_date) VALUES(%s, %s, %s)")
   
-  
-  
+  # Leemos los archivos json en nuestro directorio
+  files = os.listdir(PATH) 
+  for x in files:
+      archivo = open(PATH+"/"+x, 'r') 
+      #myFile = archivo.read()
+      myFile = json.load(archivo)
+      
+      for key, value in myFile.items():
+          #print(key, value[0])
+          hashtag = key; quantity = value[0]; publication_date = value[1]
+          data_query = (hashtag, quantity, publication_date)
+          cursor.execute(query,data_query)
+          cnx.commit()
+          print("Query efectuada exitosamente!")
   
 except mysql.connector.Error as err:
   if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -42,4 +61,4 @@ except mysql.connector.Error as err:
     
 else:
   cnx.close()
-  print("Base de datos cerrada exitosamente")
+  print("\nConexión cerrada exitosamente!")

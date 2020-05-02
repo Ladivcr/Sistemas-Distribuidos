@@ -2,7 +2,6 @@ import tweepy
 import twitter
 import json
 import requests
-import json
 import datetime
 import matplotlib.pyplot as plt
 import numpy as np
@@ -105,8 +104,6 @@ class TweetsListener(tweepy.StreamListener):
             with open(filename,"w") as file:
                 file.write(myJSON)
             
-            #Para guardar una copia de los datos
-            #output = subprocess.run(["cp",filename,"json/backup/"])
         
             # Para no estar generando gráficas que no nos aporten nuevo conocimiento, 
             # nos limitaremos a generar graficas con los hashtags que logren pasar
