@@ -1,27 +1,26 @@
 #!/usr/bin/env python3
+"""
+Store the information that we get from twitter.
+"""
 import mysql.connector
 from mysql.connector import errorcode
 import json
 import glob
 import os
-import xml.etree.ElementTree as ET
-import mysql.connector
-from mysql.connector import errorcode
 import datetime
 import subprocess
 import fnmatch
-
 
 
 #PATH = '/home/galimatias/public_html/static/'
 #PATH de trabajo
 PATH='/home/ladiv/git/Sistemas-Distribuidos/tweets'
 #PATH para respaldo
-RPATH = '/home/ladiv/git/Sistemas-Distribuidos/json/backup'
+#RPATH = '/home/ladiv/git/Sistemas-Distribuidos/json/backup'
+
 # Cargamos las credenciales
 with open('credentialsDB.json') as file:
-    credentials = json.load(file)
-    
+    credentials = json.load(file)    
 
 # Seleccionamos las credenciales
 userDB = credentials["credentials"][0]["user"]

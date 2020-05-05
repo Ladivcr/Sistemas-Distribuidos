@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+"""
+Get information from Twitter, precisely from Tweets.
+"""
 import tweepy
 import twitter
 import json
@@ -24,7 +28,6 @@ tag_vector = []
 with open('credentials.json') as file:
     credentials = json.load(file)
     
-
 # Seleccionamos las credenciales
 api_key = credentials["credentials"][0]["api_key"]
 api_secret_key = credentials["credentials"][0]["api_secret_key"]
@@ -86,15 +89,13 @@ class TweetsListener(tweepy.StreamListener):
                     time_vector.append(hour)
                     tag_vector.append(tag)
         
-        
-    
-        
             
         elapsed_time = time.time() - start_time # Obtenemos el tiempo transcurrido
         elapsed_time_seg = int(elapsed_time) # Obtenemos los segundos
         
-        # Guardaremos los datos cada 10 minutos
+        # Guardaremos los datos cada 10 minutos (Falta averiguar como reiniciar el conteo del reloj) - NOTA Para mi
         if elapsed_time_seg == 600:
+        
             # Guardar los tuits 
             myJSON = json.dumps(hashtags)
             now = datetime.datetime.now()
