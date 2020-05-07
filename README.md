@@ -1,4 +1,4 @@
-# Identifying trends on Twitter
+# Identifying possible trends on Twitter
 - Monserrat Esperanza Alvaréz 
 - José Vidal Cardona Rosas 
 
