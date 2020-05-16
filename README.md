@@ -66,14 +66,17 @@ You need to create a Database as follow:
 Extreme programming 
 
 ## Implementation and tests
-We ran our code for get some tweets with filter per words
-and we had lucky because we could catch some tweets but, we didn't know
-if this tweets were real, so, we used a twitter account and tweet something
-with a key word.
+We ran our code for get some tweets with filter per geographical coordinates
+and we had lucky because we could catch many tweets but, we wanted to try our others
+codes (02 and 03) so, we stored this tweets and plot this tweets. 
 ## Results
-![tuit](resources/tuit.png)
-![code](resources/code.png)
-As we can see, our code works and this check our tests
+# Storage tweets 
+![tuit](resources/mysql.png)
+# Plot tweets
+![code](resources/possible_trends-15-05-2020-19-43-46.png)
+
+As we can see, there are many tweets because when we did the query, we didn't specify 
+some range. 
 
 ## Conclusions
 Our project is not over yet
