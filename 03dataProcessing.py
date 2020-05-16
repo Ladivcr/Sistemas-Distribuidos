@@ -58,18 +58,26 @@ fig, ax = plt.subplots()
 now = datetime.datetime.now()
 actual_date = now.strftime('Day :%d, Month: %m, Year: %Y, Hour: %H, Minutes: %M, Seconds: %S')
 ax.set(xlabel='Tags', ylabel='Number of tweets', title=actual_date)
-font = {'family' : 'normal', 'weight' : 'normal', 'size'   : 8}
-arr_temp = [int(i) for i in range(len(x))] # arreglo temporal para el eje x 
-ax.plot(arr_temp, y, "-or")
+
+#font = {'family' : 'normal', 'weight' : 'normal', 'size'   : 8}
+#arr_temp = [int(i) for i in range(len(x))] # arreglo temporal para el eje x 
+#ax.plot(arr_temp, y, "-or")
+# Para etiquetar los puntos sólo hay que descomentar lo comentado en la parte de graficar
+# y comentar ax.plot(x,y) y plt.xticks
 ax.grid()
+ax.plot(x,y,"-or")
+plt.xticks(rotation=88)
+
+
 # Establecer el tamaño de los ejes
 plt.ylim(0, max(y)+5)
 plt.yscale("linear")
+
 # Etiquetar los puntos
-for label, xx, yy in zip(x, arr_temp, y):
-    plt.annotate(label, xy=(xx, yy), xytext=(-15, 15),textcoords='offset points', ha='right', va='bottom',
-                 bbox=dict(boxstyle='round,pad=0.5', fc='yellow', alpha=0.5),arrowprops=dict(arrowstyle = '->',
-                                                                                             connectionstyle='arc3,rad=0'))
+#for label, xx, yy in zip(x, arr_temp, y):
+    #plt.annotate(label, xy=(xx, yy), xytext=(-15, 15),textcoords='offset points', ha='right', va='bottom',
+                 #bbox=dict(boxstyle='round,pad=0.5', fc='yellow', alpha=0.5),arrowprops=dict(arrowstyle = '->',
+                                                                                             #connectionstyle='arc3,rad=0'))
                 
          
 # Guardamos la gráfica 
@@ -82,3 +90,4 @@ sys.exit()
 
 #NOTA PARA EL AUTOR: Necesito borrar cada día los registros realizados en la base de datos 
 #Ya que las tendencias son por días por lo que no vale la pena guardarlas más de un día. 
+
