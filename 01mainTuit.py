@@ -94,7 +94,8 @@ class TweetsListener(tweepy.StreamListener):
         elapsed_time_seg = int(elapsed_time) # Obtenemos los segundos
         
         # Guardaremos los datos cada 10 minutos (Falta averiguar como reiniciar el conteo del reloj) - NOTA Para mi
-        if elapsed_time_seg == 600:
+        print(elapsed_time)
+        if elapsed_time_seg >= 600:
         
             # Guardar los tuits 
             myJSON = json.dumps(hashtags)
@@ -104,6 +105,10 @@ class TweetsListener(tweepy.StreamListener):
             # Guardamos nuestros datos en un archivo json
             with open(filename,"w") as file:
                 file.write(myJSON)
+                
+            file.close()
+                
+            sys.exit()
             
         
             # Para no estar generando gráficas que no nos aporten nuevo conocimiento, 

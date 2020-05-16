@@ -13,6 +13,7 @@ import subprocess
 import matplotlib
 #matplotlib.use('Agg') #Usamos el ambiente gráfico del sistema
 import matplotlib.pyplot as plt
+import sys
 
 
 #PATH='/home/galimatias/public_html/static/'
@@ -33,7 +34,7 @@ try:
   cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
   print("Conexión exitosa!\n")
   cursor = cnx.cursor()
-  query = ("SELECT hashtag, quantity FROM possible_trends WHERE quantity > 0 ORDER BY quantity")
+  query = ("SELECT hashtag, quantity FROM possible_trends WHERE quantity > 50 ORDER BY quantity")
   cursor.execute(query)
   for (hashtag, quantity) in cursor:
       print(f"{hashtag}\t{quantity}")
@@ -74,6 +75,10 @@ for label, xx, yy in zip(x, arr_temp, y):
 # Guardamos la gráfica 
 #today = datetime.datetime.now()
 #día-mes-año - horas-minutos-segundos
-#actual_day = now.strftime('/home/galimatias/public_html/static/possible_trends-%d-%m-%Y-%H-%M-%S.png')
-#plt.savefig(actual_day, bbox_inches='tight')
-plt.show()
+actual_day = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/graphics/possible_trends-%d-%m-%Y-%H-%M-%S.png')
+plt.savefig(actual_day, bbox_inches='tight')
+#plt.show()
+sys.exit()
+
+#NOTA PARA EL AUTOR: Necesito borrar cada día los registros realizados en la base de datos 
+#Ya que las tendencias son por días por lo que no vale la pena guardarlas más de un día. 

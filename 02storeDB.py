@@ -10,11 +10,12 @@ import os
 import datetime
 import subprocess
 import fnmatch
+import sys
 
 
 #PATH = '/home/galimatias/public_html/static/'
 #PATH de trabajo
-PATH='/home/ladiv/git/Sistemas-Distribuidos/tweets'
+PATH='/home/ladiv/github/Sistemas-Distribuidos/tweets'
 #PATH para respaldo
 #RPATH = '/home/ladiv/git/Sistemas-Distribuidos/json/backup'
 
@@ -49,6 +50,9 @@ try:
           cursor.execute(query,data_query)
           cnx.commit()
           print("Query efectuada exitosamente!")
+          
+  #Cerramos el programa para que el sh pueda ejecutar el siguiente
+  sys.exit()
   
 except mysql.connector.Error as err:
   if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
