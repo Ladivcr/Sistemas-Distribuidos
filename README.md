@@ -29,7 +29,7 @@ GNU General Public License v3.0
 * Data source: Twitter
 * Storage system: Mysql
 * Processing system: Python, Tweepy, json and Mysql
-* Data visualization: matplotlib.pyplot and other different tools for data visualization
+* Data visualization: matplotlib.pyplot
 
 ## Install and use
 * Clone or download this [project](https://github.com/Ladivcr/Sistemas-Distribuidos.git) 
