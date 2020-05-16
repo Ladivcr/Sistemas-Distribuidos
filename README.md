@@ -14,9 +14,12 @@ GNU General Public License v3.0
       
 ## Software Tools
 * Twitter API
-* Pandas Library
+* mysql Library
+* json Library
+* datetime Library
 * Matplotlib Library
-* Seaborn Library
+* sys Library
+
 
 
 ## Data Source
@@ -25,20 +28,29 @@ GNU General Public License v3.0
 ## General architecture of the system
 * Data source: Twitter
 * Storage system: Mysql
-* Processing system: Python and Tweepy
-* Data visualization: HTML5, Pyplot and other different tools for data visualization
+* Processing system: Python, Tweepy, json and Mysql
+* Data visualization: matplotlib.pyplot and other different tools for data visualization
 
 ## Install and use
 * Clone or download this [project](https://github.com/Ladivcr/Sistemas-Distribuidos.git) 
+> The project use some librarys, so, you need to install this librarys for optimal use. 
 > You will need to use some credencial from API Twitter, If you have it you can put it your credencial in the code. 
 > If you don't have credencial, I will send my credencial in an Email (Just if you are my teacher or his assistant) 
 * Open a terminal 
-* Write: python3 01mainTuit.py 
+* Write: ./00runTrends.sh 
 > In this step, you should have already put your credentials in the code
 * Press Enter
 
 **Note:** If you don't have credencials from Twitter, you will need to create a development account on [Twitter](https://developer.twitter.com/) :+1:
 
+**Extra Note:** You need to change some paths in the code, because the paths are paths in my personal computer.
+
+## About our data base
+
+You need to create a Database as follow:
+
+* > CREATE DATA BASE trends;
+* > CREATE TABLE possible_trends(hashtag VARCHAR (280), quantity INT, publication_date DATE);
 
 ## Abstract
     Currently, we have the power of social media for communication in real time
