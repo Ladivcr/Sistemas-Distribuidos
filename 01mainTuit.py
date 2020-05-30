@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
+#-*- coding: utf-8 -*-
 """
-Get information from Twitter, precisely from Tweets.
+@uthor: José Vidal Cardona Rosas
+About: Get information from Twitter, precisely from Tweets.
 """
+
 import tweepy
 import twitter
 import json
@@ -10,13 +13,13 @@ import datetime
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
+import os
 import time
 import subprocess
 
 
 # Tiempo para el control de la recepción de tuits (esta en segundos)
 start_time = time.time() 
-
 # Diccionario para controlar el número de hashtags
 hashtags = {}
 # Lista para guardar el tiempo en el que el tuit fue publicado
@@ -33,6 +36,7 @@ api_key = credentials["credentials"][0]["api_key"]
 api_secret_key = credentials["credentials"][0]["api_secret_key"]
 access_token = credentials["credentials"][0]["access_token"]
 access_token_secret = credentials["credentials"][0]["access_token_secret"]
+
 try:
     # Nos autenticamos con nuestras credenciales de twitter
     auth = tweepy.OAuthHandler(api_key, api_secret_key)
@@ -89,91 +93,73 @@ class TweetsListener(tweepy.StreamListener):
                     time_vector.append(hour)
                     tag_vector.append(tag)
         
-            
+        
+        # Conteo del tiempo transcurrido    
         elapsed_time = time.time() - start_time # Obtenemos el tiempo transcurrido
         elapsed_time_seg = int(elapsed_time) # Obtenemos los segundos
         
         # Guardaremos los datos cada 10 minutos (Falta averiguar como reiniciar el conteo del reloj) - NOTA Para mi
-        print(elapsed_time)
-        if elapsed_time_seg >= 600:
+        #print(elapsed_time)
+        if elapsed_time_seg >= 3600:
         
             # Guardar los tuits 
             myJSON = json.dumps(hashtags)
             now = datetime.datetime.now()
             #día-mes-año - horas-minutos-segundos
-            filename = now.strftime('tweets/possible_trend-%d-%m-%Y-%H-%M-%S.json')
+            filename = now.strftime('tweets/possible_trend-%d-%m-%Y-%H-%M.json')
             # Guardamos nuestros datos en un archivo json
             with open(filename,"w") as file:
                 file.write(myJSON)
                 
             file.close()
                 
+            # Cerramos el código para que el archivo sh pueda ejecutar el siguiente código
             sys.exit()
             
         
-            # Para no estar generando gráficas que no nos aporten nuevo conocimiento, 
-            # nos limitaremos a generar graficas con los hashtags que logren pasar
-            # o igualar el umbral para considerar "posible tendencía"
-        
-            """
-            arr_de_etiquetas = [] # Arrreglo de etiquetas para graficar nombramiento de puntos
-            arr_de_valores = [] # arreglo de valores para graficar
-            for clave in hashtags.keys():
+        # Esta condición es por si algún hashtag sobrepasa el umbral antes de que el código termine su tiempo de ejecución.     
+        # Hace falta añadir un controlador, es decir, para ejecutar el código sólo una vez
+        # --------------------------------------------------------------------------
+        """
+        elif len(hashtags.keys()) != 0:
+            auxValues = []
+            for cantidad, fecha in hashtags.values():
+                auxValues.append(cantidad)
                 
-                if hashtags[clave][0] >= 50: 
-                    arr_de_etiquetas.append(clave)
-                    arr_de_valores.append(hashtags[clave][0])
-                #else:
-                    #print(max(hashtags.values()))
-                    #sys.exit()
-            arr_temp = [int(i) for i in range(len(arr_de_etiquetas))] # arreglo temporal para el eje x 
-            
-            
-            
-            # Graficar
-            fig, ax = plt.subplots()
-            now = datetime.datetime.now()
-            actual_date = now.strftime('Day :%d, Month: %m, Year: %Y, Hour: %H, Minutes: %M, Seconds: %S')
-            #ax.set_title(datetime.date.today())
-            ax.set_title(actual_date)
-            ax.set_xlabel("Tags")
-            ax.set_ylabel("Number of tweets")
-            font = {'family' : 'normal', 'weight' : 'normal', 'size'   : 8}
-         
-            ax.plot(arr_temp, arr_de_valores, "-or")
-            
-            ax.grid()
-            
-            # Establecer el tamaño de los ejes
-            plt.ylim(0, max(arr_de_valores)+5)
-            plt.yscale("linear")
-            
-            # Etiquetar los puntos
-            for label, x, y in zip(arr_de_etiquetas, arr_temp, arr_de_valores):
-                plt.annotate(label, xy=(x, y), xytext=(-15, 15),
-                textcoords='offset points', ha='right', va='bottom',
-                bbox=dict(boxstyle='round,pad=0.5', fc='yellow', alpha=0.5),
-                arrowprops=dict(arrowstyle = '->', connectionstyle='arc3,rad=0'))
+            valorMax = max(auxValues)
+            if valorMax >= 2:
+                # Guardar los tuits 
+                myJSON = json.dumps(hashtags)
+                now = datetime.datetime.now()
+                #día-mes-año - horas-minutos-segundos
+                filename = now.strftime('tweets/possible_trend-%d-%m-%Y-%H-%M.json')
+                # Guardamos nuestros datos en un archivo json
+                with open(filename,"w") as file:
+                    file.write(myJSON)
                 
-         
+                file.close()
+                
+                print("¡Tweets escritos en JSON con éxito!")
+                # Una vez escritos los datos en el archivo JSON 
+                # Procedemos a guardarlos en la base de datos
+                # Ejecutamos el código de almacenamiento
+                os.system('"python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py"')
+                print("¡Código de almacenamiento ejecutado con éxito!")
+                os.system('"python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py"')
+                print("¡Código de procesamiento ejecutado con éxito!")
             
-            # Guardamos la gráfica 
-            #today = datetime.datetime.now()
-            #día-mes-año - horas-minutos-segundos
-            #actual_day = now.strftime('graphics/%d-%m-%Y-%H-%M-%S.png')
-            #plt.savefig(actual_day, bbox_inches='tight')
-            plt.show()
-            """
-           
-            
+        """    
+        # --------------------------------------
+            # ---------------------------------------------------------------- 
+            # - Código eliminado, guardado en un archivo con los identificadores # -----
+            # Por si lo vuelvo a necesitar aquí. 
+            # ----------------------------------------------------------------
         
     # Estatus de la conexión
     def on_error(self, status_code):
         print("Error de conexión", status_code)
 
 
-
-  
 # Creamos una clase para monitorear los tuits
 stream = TweetsListener()
 streamingApi = tweepy.Stream(auth=api.auth, listener=stream)

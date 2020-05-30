@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
+#-*- coding: utf-8 -*-
 """
-Store the information that we get from twitter.
+@uthor: José Vidal Cardona Rosas
+About: Store the information that we get from twitter.
 """
+
 import mysql.connector
 from mysql.connector import errorcode
 import json

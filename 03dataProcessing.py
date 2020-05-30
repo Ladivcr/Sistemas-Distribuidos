@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+#-*- coding: utf-8 -*-
 """
- Execute a query to the database, 
- process information and produces
- a simple plot with a possible trend.
+@uthor: José Vidal Cardona Rosas
+About: Execute a query to the database, process information and produces a simple plot with a possible trend.
 """
+
 import mysql.connector
 from mysql.connector import errorcode
 import json
@@ -34,7 +35,7 @@ try:
   cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
   print("Conexión exitosa!\n")
   cursor = cnx.cursor()
-  query = ("SELECT hashtag, quantity FROM possible_trends WHERE quantity > 50 ORDER BY quantity")
+  query = ("SELECT hashtag, quantity FROM possible_trends WHERE quantity > 1 ORDER BY quantity")
   cursor.execute(query)
   for (hashtag, quantity) in cursor:
       print(f"{hashtag}\t{quantity}")
@@ -56,7 +57,7 @@ else:
 # Graficar
 fig, ax = plt.subplots()
 now = datetime.datetime.now()
-actual_date = now.strftime('Day :%d, Month: %m, Year: %Y, Hour: %H, Minutes: %M, Seconds: %S')
+actual_date = now.strftime('Day: %d-Month: %m-Year: %Y-Hour: %H-Minutes: %M')
 ax.set(xlabel='Tags', ylabel='Number of tweets', title=actual_date)
 
 #font = {'family' : 'normal', 'weight' : 'normal', 'size'   : 8}
@@ -66,7 +67,7 @@ ax.set(xlabel='Tags', ylabel='Number of tweets', title=actual_date)
 # y comentar ax.plot(x,y) y plt.xticks
 ax.grid()
 ax.plot(x,y,"-or")
-plt.xticks(rotation=88)
+plt.xticks(rotation=86)
 
 
 # Establecer el tamaño de los ejes
@@ -83,8 +84,13 @@ plt.yscale("linear")
 # Guardamos la gráfica 
 #today = datetime.datetime.now()
 #día-mes-año - horas-minutos-segundos
-actual_day = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/graphics/possible_trends-%d-%m-%Y-%H-%M-%S.png')
-plt.savefig(actual_day, bbox_inches='tight')
+# -------------------------------------
+# Guardar graficas con diferente nombre
+#actual_day = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/graphics/possible_trends-%d-%m-%Y-%H-%M.png')
+#plt.savefig(actual_day, bbox_inches='tight')
+# -------------------------------------
+name_fig = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/graphics/possible_trends.png')
+plt.savefig(name_fig, bbox_inches='tight')
 #plt.show()
 sys.exit()
 
