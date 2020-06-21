@@ -26,7 +26,8 @@ hashtags = {}
 time_vector = []
 # Lista para guardar los hashtags
 tag_vector = []
-
+# Control de las ejecuciones de código 
+saveValues = []
 # Cargamos las credenciales
 with open('credentials.json') as file:
     credentials = json.load(file)
@@ -100,7 +101,9 @@ class TweetsListener(tweepy.StreamListener):
         
         # Guardaremos los datos cada 10 minutos (Falta averiguar como reiniciar el conteo del reloj) - NOTA Para mi
         #print(elapsed_time)
-        if elapsed_time_seg >= 3600:
+        # Debo de modificar esta instruccion sino el programa se correra esto monton de veces cuando se 
+        # alcance el umbral de tiempo
+        if elapsed_time_seg >= 30:
         
             # Guardar los tuits 
             myJSON = json.dumps(hashtags)
@@ -112,43 +115,54 @@ class TweetsListener(tweepy.StreamListener):
                 file.write(myJSON)
                 
             file.close()
+            
+            os.system('"python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py"')
+            print("Código de almacenamiento ejecutado correctamente...")
+            
+            os.system('"python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py"')
+            print("Código de procesamiento ejecutado correctamente...")
                 
             # Cerramos el código para que el archivo sh pueda ejecutar el siguiente código
-            sys.exit()
+            #sys.exit()
             
         
         # Esta condición es por si algún hashtag sobrepasa el umbral antes de que el código termine su tiempo de ejecución.     
         # Hace falta añadir un controlador, es decir, para ejecutar el código sólo una vez
         # --------------------------------------------------------------------------
-        """
-        elif len(hashtags.keys()) != 0:
-            auxValues = []
-            for cantidad, fecha in hashtags.values():
-                auxValues.append(cantidad)
-                
-            valorMax = max(auxValues)
-            if valorMax >= 2:
+    
+        # hashtags[tag] = [1, date] manera en que son almacenados los datos
+        try:
+            valorSalvar = max(hashtags.values())
+            if valorSalvar[0] >= 2:
+                tmpDic = {}
+                claves = list(hashtags.keys())
+                valores = list(dic.values())
+                claveSalvar = list(hashtags.keys())[list(hashtags.values()).index(valorSalvar)]
+                tmpDic[claveSalvar]=valorSalvar
+                saveValues.append(claveSalvar)
+            
+            # Corroboramos que la clave no haya sido ya añadida
+            if claveSalvar not in saveValues:
                 # Guardar los tuits 
-                myJSON = json.dumps(hashtags)
-                now = datetime.datetime.now()
-                #día-mes-año - horas-minutos-segundos
-                filename = now.strftime('tweets/possible_trend-%d-%m-%Y-%H-%M.json')
+                myJSON = json.dumps(tmpDic)
                 # Guardamos nuestros datos en un archivo json
                 with open(filename,"w") as file:
                     file.write(myJSON)
                 
                 file.close()
-                
-                print("¡Tweets escritos en JSON con éxito!")
+                print("Tweets escritos en JSON correctamente...")
+            
                 # Una vez escritos los datos en el archivo JSON 
                 # Procedemos a guardarlos en la base de datos
                 # Ejecutamos el código de almacenamiento
                 os.system('"python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py"')
-                print("¡Código de almacenamiento ejecutado con éxito!")
-                os.system('"python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py"')
-                print("¡Código de procesamiento ejecutado con éxito!")
+                print("Código de almacenamiento ejecutado con éxito...")
             
-        """    
+                os.system('"python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py"')
+                print("Código de procesamiento ejecutado con éxito...")
+        except:
+            pass
+        
         # --------------------------------------
             # ---------------------------------------------------------------- 
             # - Código eliminado, guardado en un archivo con los identificadores # -----

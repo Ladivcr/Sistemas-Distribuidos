@@ -52,7 +52,8 @@ try:
           data_query = (hashtag, quantity, publication_date)
           cursor.execute(query,data_query)
           cnx.commit()
-          print("Query efectuada exitosamente!")
+
+      print("Querys efectuadas con correctamente...")
           
   #Cerramos el programa para que el sh pueda ejecutar el siguiente
   sys.exit()
