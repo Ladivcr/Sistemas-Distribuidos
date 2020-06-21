@@ -35,7 +35,7 @@ try:
   cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
   print("Conexión exitosa!\n")
   cursor = cnx.cursor()
-  query = ("SELECT hashtag, quantity FROM possible_trends WHERE quantity > 1 ORDER BY quantity")
+  query = ("SELECT hashtag, quantity FROM possible_trends WHERE quantity >= 1 ORDER BY quantity")
   cursor.execute(query)
   for (hashtag, quantity) in cursor:
       print(f"{hashtag}\t{quantity}")
@@ -57,7 +57,7 @@ else:
 # Graficar
 fig, ax = plt.subplots()
 now = datetime.datetime.now()
-actual_date = now.strftime('Day: %d-Month: %m-Year: %Y-Hour: %H-Minutes: %M')
+actual_date = now.strftime('Day: %d | Month: %m | Year: %Y - Hour: %H | Minutes: %M')
 ax.set(xlabel='Tags', ylabel='Number of tweets', title=actual_date)
 
 #font = {'family' : 'normal', 'weight' : 'normal', 'size'   : 8}
@@ -71,7 +71,7 @@ plt.xticks(rotation=86)
 
 
 # Establecer el tamaño de los ejes
-plt.ylim(0, max(y)+5)
+plt.ylim(0, max(list(set(y)))+3)
 plt.yscale("linear")
 
 # Etiquetar los puntos
@@ -92,7 +92,8 @@ plt.yscale("linear")
 name_fig = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/graphics/possible_trends.png')
 plt.savefig(name_fig, bbox_inches='tight')
 #plt.show()
-sys.exit()
+#sys.exit()
+print("Termina PROCESAMIENTO DE DATOS...")
 
 #NOTA PARA EL AUTOR: Necesito borrar cada día los registros realizados en la base de datos 
 #Ya que las tendencias son por días por lo que no vale la pena guardarlas más de un día. 

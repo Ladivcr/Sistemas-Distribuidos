@@ -79,6 +79,7 @@ class TweetsListener(tweepy.StreamListener):
             for dicci in hasht: 
                 tag = dicci["text"]
                 tag = tag.lower()
+                tag = str(tag) # agregue esto para lidiar con un problema en strings
                 #print(tag)
                 if (tag in hashtags.keys()) == True:
                     hashtags[tag][0] += 1
@@ -103,7 +104,7 @@ class TweetsListener(tweepy.StreamListener):
         #print(elapsed_time)
         # Debo de modificar esta instruccion sino el programa se correra esto monton de veces cuando se 
         # alcance el umbral de tiempo
-        if elapsed_time_seg >= 30:
+        if elapsed_time_seg >= 60:
         
             # Guardar los tuits 
             myJSON = json.dumps(hashtags)
@@ -115,15 +116,17 @@ class TweetsListener(tweepy.StreamListener):
                 file.write(myJSON)
                 
             file.close()
+            try:
+                os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py')
+                print("Código de almacenamiento ejecutado correctamente...")
             
-            os.system('"python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py"')
-            print("Código de almacenamiento ejecutado correctamente...")
-            
-            os.system('"python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py"')
-            print("Código de procesamiento ejecutado correctamente...")
-                
+                os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py')
+                print("Código de procesamiento ejecutado correctamente...")
+            except: 
+                print("\n\tNo se han podido ejecutar los códigos de almacenamiento y procesamiento de datos\n")
             # Cerramos el código para que el archivo sh pueda ejecutar el siguiente código
-            #sys.exit()
+            print(hashtags)
+            sys.exit()
             
         
         # Esta condición es por si algún hashtag sobrepasa el umbral antes de que el código termine su tiempo de ejecución.     
@@ -155,11 +158,15 @@ class TweetsListener(tweepy.StreamListener):
                 # Una vez escritos los datos en el archivo JSON 
                 # Procedemos a guardarlos en la base de datos
                 # Ejecutamos el código de almacenamiento
-                os.system('"python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py"')
-                print("Código de almacenamiento ejecutado con éxito...")
+                try:
+                    os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py')
+                    print("Código de almacenamiento ejecutado con éxito...")
             
-                os.system('"python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py"')
-                print("Código de procesamiento ejecutado con éxito...")
+                    os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py')
+                    print("Código de procesamiento ejecutado con éxito...")
+                    print(saveValues)
+                except:
+                    print("\n\tNo se han podido ejecutar los códigos de almacenamiento y procesamiento\n")
         except:
             pass
         

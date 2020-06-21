@@ -54,9 +54,10 @@ try:
           cnx.commit()
 
       print("Querys efectuadas con correctamente...")
+      print("Termina proceso de ALMACENAMIENTO...")
           
   #Cerramos el programa para que el sh pueda ejecutar el siguiente
-  sys.exit()
+  #sys.exit()
   
 except mysql.connector.Error as err:
   if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -68,4 +69,4 @@ except mysql.connector.Error as err:
     
 else:
   cnx.close()
-  print("\nConexión cerrada exitosamente!")
+  print("\nConexión cerrada exitosamente!\nNo a sido posible almacenar los datos...")
