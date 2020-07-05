@@ -1,0 +1,11 @@
+/*--------------
+index.css
+Reglas de estilo para index.html
+---------------*/
+
+/*Regla para el body de la página*/
+body
+{
+  background: #234;
+  color: #fff;
+}
