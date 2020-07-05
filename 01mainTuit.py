@@ -27,7 +27,7 @@ time_vector = []
 # Lista para guardar los hashtags
 tag_vector = []
 # Control de las ejecuciones de código 
-saveValues = []
+#saveValues = []
 # Cargamos las credenciales
 with open('credentials.json') as file:
     credentials = json.load(file)
@@ -104,13 +104,14 @@ class TweetsListener(tweepy.StreamListener):
         #print(elapsed_time)
         # Debo de modificar esta instruccion sino el programa se correra esto monton de veces cuando se 
         # alcance el umbral de tiempo
-        if elapsed_time_seg >= 60:
+        
+        if elapsed_time_seg >= 240:
         
             # Guardar los tuits 
             myJSON = json.dumps(hashtags)
             now = datetime.datetime.now()
             #día-mes-año - horas-minutos-segundos
-            filename = now.strftime('tweets/possible_trend-%d-%m-%Y-%H-%M.json')
+            filename = now.strftime('tweets/possible_trend-%d-%m-%Y-%H-%M-%S.json')
             # Guardamos nuestros datos en un archivo json
             with open(filename,"w") as file:
                 file.write(myJSON)
@@ -125,7 +126,7 @@ class TweetsListener(tweepy.StreamListener):
             except: 
                 print("\n\tNo se han podido ejecutar los códigos de almacenamiento y procesamiento de datos\n")
             # Cerramos el código para que el archivo sh pueda ejecutar el siguiente código
-            print(hashtags)
+            #print(hashtags)
             sys.exit()
             
         
@@ -134,41 +135,52 @@ class TweetsListener(tweepy.StreamListener):
         # --------------------------------------------------------------------------
     
         # hashtags[tag] = [1, date] manera en que son almacenados los datos
-        try:
-            valorSalvar = max(hashtags.values())
-            if valorSalvar[0] >= 2:
-                tmpDic = {}
-                claves = list(hashtags.keys())
-                valores = list(dic.values())
-                claveSalvar = list(hashtags.keys())[list(hashtags.values()).index(valorSalvar)]
-                tmpDic[claveSalvar]=valorSalvar
-                saveValues.append(claveSalvar)
-            
-            # Corroboramos que la clave no haya sido ya añadida
-            if claveSalvar not in saveValues:
-                # Guardar los tuits 
-                myJSON = json.dumps(tmpDic)
-                # Guardamos nuestros datos en un archivo json
-                with open(filename,"w") as file:
-                    file.write(myJSON)
+        """else:
+            tmpDic = {}
+            try:
+                print("ENTRE 1")
                 
-                file.close()
-                print("Tweets escritos en JSON correctamente...")
+                valorSalvar = max(hashtags.values())
+                if int(valorSalvar[0]) >= 2:
+                    print("ENTRE 2")
+                    
+                    #claves = list(hashtags.keys())
+                    #valores = list(dic.values())
+                    claveSalvar = list(hashtags.keys())[list(hashtags.values()).index(valorSalvar)]
+                    tmpDic[claveSalvar] = valorSalvar
+                    print(hashtags, claveSalvar, valorSalvar)
+                    # Corroboramos que la clave no haya sido ya añadida
+                    if (claveSalvar not in saveValues):
+                        print("ENTRE 3")
+                        saveValues.append(claveSalvar)
+                        # Guardar los tuits 
+                        myJSON = json.dumps(tmpDic)
+                        # Guardamos nuestros datos en un archivo json
+                        now = datetime.datetime.now()
+                        filename = now.strftime('tweets/possible_trend-%d-%m-%Y/%H-%M-%S.json')
+                        with open(filename,"w") as file:
+                            file.write(myJSON)
+                
+                        file.close()
+                        print("Tweets escritos en JSON correctamente...")
             
-                # Una vez escritos los datos en el archivo JSON 
-                # Procedemos a guardarlos en la base de datos
-                # Ejecutamos el código de almacenamiento
-                try:
-                    os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py')
-                    print("Código de almacenamiento ejecutado con éxito...")
+                        # Una vez escritos los datos en el archivo JSON 
+                        # Procedemos a guardarlos en la base de datos
+                        # Ejecutamos el código de almacenamiento
+                        try:
+                            print("ENTRE 4")
+                            os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py')
+                            print("Código de almacenamiento ejecutado con éxito...")
             
-                    os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py')
-                    print("Código de procesamiento ejecutado con éxito...")
-                    print(saveValues)
-                except:
-                    print("\n\tNo se han podido ejecutar los códigos de almacenamiento y procesamiento\n")
-        except:
-            pass
+                            os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py')
+                            print("Código de procesamiento ejecutado con éxito...")
+                            print(saveValues)
+                        except:
+                            print("No se han podido ejecutar los códigos de almacenamiento y procesamiento")
+                    else:
+                        print("Save values: ",saveValues)
+            except:
+                pass"""
         
         # --------------------------------------
             # ---------------------------------------------------------------- 

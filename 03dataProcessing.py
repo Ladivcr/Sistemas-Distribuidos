@@ -35,7 +35,7 @@ try:
   cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
   print("Conexión exitosa!\n")
   cursor = cnx.cursor()
-  query = ("SELECT hashtag, quantity FROM possible_trends WHERE quantity >= 1 ORDER BY quantity")
+  query = ("SELECT hashtag, quantity FROM possible_trends WHERE quantity >= 2 ORDER BY quantity")
   cursor.execute(query)
   for (hashtag, quantity) in cursor:
       print(f"{hashtag}\t{quantity}")
@@ -89,7 +89,7 @@ plt.yscale("linear")
 #actual_day = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/graphics/possible_trends-%d-%m-%Y-%H-%M.png')
 #plt.savefig(actual_day, bbox_inches='tight')
 # -------------------------------------
-name_fig = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/graphics/possible_trends.png')
+name_fig = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/graphics/possible_trends:'+'%d-%m-%Y-%H-%M'+'.png')
 plt.savefig(name_fig, bbox_inches='tight')
 #plt.show()
 #sys.exit()

@@ -53,8 +53,8 @@ try:
           cursor.execute(query,data_query)
           cnx.commit()
 
-      print("Querys efectuadas con correctamente...")
-      print("Termina proceso de ALMACENAMIENTO...")
+      #print("Querys efectuadas correctamente...")
+  print("Termina proceso de ALMACENAMIENTO...")
           
   #Cerramos el programa para que el sh pueda ejecutar el siguiente
   #sys.exit()
@@ -69,4 +69,4 @@ except mysql.connector.Error as err:
     
 else:
   cnx.close()
-  print("\nConexión cerrada exitosamente!\nNo a sido posible almacenar los datos...")
+  #print("\nConexión cerrada exitosamente!\nNo a sido posible almacenar los datos...")
