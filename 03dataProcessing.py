@@ -21,7 +21,7 @@ import sys
 
 # Cargamos las credenciales
 with open('credentialsDB.json') as file:
-    credentials = json.load(file)    
+    credentials = json.load(file)
 
 # Seleccionamos las credenciales
 userDB = credentials["credentials"][0]["user"]
@@ -42,8 +42,8 @@ try:
       x.append(hashtag)
       y.append(quantity)
 
-  
-        
+
+
 except mysql.connector.Error as err:
     if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
         print("Something is wrong with your user name or password")
@@ -61,7 +61,7 @@ actual_date = now.strftime('Day: %d | Month: %m | Year: %Y - Hour: %H | Minutes:
 ax.set(xlabel='Tags', ylabel='Number of tweets', title=actual_date)
 
 #font = {'family' : 'normal', 'weight' : 'normal', 'size'   : 8}
-#arr_temp = [int(i) for i in range(len(x))] # arreglo temporal para el eje x 
+#arr_temp = [int(i) for i in range(len(x))] # arreglo temporal para el eje x
 #ax.plot(arr_temp, y, "-or")
 # Para etiquetar los puntos sólo hay que descomentar lo comentado en la parte de graficar
 # y comentar ax.plot(x,y) y plt.xticks
@@ -79,9 +79,9 @@ plt.yscale("linear")
     #plt.annotate(label, xy=(xx, yy), xytext=(-15, 15),textcoords='offset points', ha='right', va='bottom',
                  #bbox=dict(boxstyle='round,pad=0.5', fc='yellow', alpha=0.5),arrowprops=dict(arrowstyle = '->',
                                                                                              #connectionstyle='arc3,rad=0'))
-                
-         
-# Guardamos la gráfica 
+
+
+# Guardamos la gráfica
 #today = datetime.datetime.now()
 #día-mes-año - horas-minutos-segundos
 # -------------------------------------
@@ -89,12 +89,11 @@ plt.yscale("linear")
 #actual_day = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/graphics/possible_trends-%d-%m-%Y-%H-%M.png')
 #plt.savefig(actual_day, bbox_inches='tight')
 # -------------------------------------
-name_fig = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/graphics/possible_trends:'+'%d-%m-%Y-%H-%M'+'.png')
+name_fig = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/static/graphics/possible_trends.png')
 plt.savefig(name_fig, bbox_inches='tight')
 #plt.show()
 #sys.exit()
 print("Termina PROCESAMIENTO DE DATOS...")
 
-#NOTA PARA EL AUTOR: Necesito borrar cada día los registros realizados en la base de datos 
-#Ya que las tendencias son por días por lo que no vale la pena guardarlas más de un día. 
-
+#NOTA PARA EL AUTOR: Necesito borrar cada día los registros realizados en la base de datos
+#Ya que las tendencias son por días por lo que no vale la pena guardarlas más de un día.

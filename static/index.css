@@ -9,3 +9,9 @@ body
   background: #234;
   color: #fff;
 }
+
+img.center {
+display: block;
+margin-left: auto;
+margin-right: auto;
+}
