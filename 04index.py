@@ -60,10 +60,6 @@ def graph_page():
 
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
-#</int:page_num>
-
 # Función principal
 #if __name__ == "__main__":
     # Ejecutamos el objeto
