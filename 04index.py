@@ -31,36 +31,12 @@ def index():
 
 @app.route("/historial_trends")
 def graph_page():
-    """
-    try:
-      cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
-      print("Conexión exitosa!\n")
-      cursor = cnx.cursor()
-      query = ("SELECT * FROM possible_trends")
-      cursor.execute(query)
-      Hashtags = cursor.fetchall()
-      cnx.commit()
-      hashtag = [x[0] for x in Hashtags]
-      quantity = [x[1] for x in Hashtags]
-      publication_date = [x[2] for x in Hashtags]
-
-    except mysql.connector.Error as err:
-      if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-        print("Something is wrong with your user name or password")
-      elif err.errno == errorcode.ER_BAD_DB_ERROR:
-        print("Database does not exist")
-      else:
-        print("Error: ",err)
-
-    else:
-      cnx.close()
-    """
     return render_template('historial.html')
 
 
 
 
 # Función principal
-#if __name__ == "__main__":
+if __name__ == "__main__":
     # Ejecutamos el objeto
-    #app.run(debug=True)
+    app.run(debug=True)
