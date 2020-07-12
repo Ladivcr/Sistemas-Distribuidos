@@ -1,5 +1,5 @@
 # Importamos la librería
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import json
 from flask_sqlalchemy import SQLAlchemy
 import mysql.connector
@@ -29,10 +29,31 @@ def index():
 
 
 
-@app.route("/historial_trends")
+@app.route("/historial-tendencias")
 def graph_page():
-    return render_template('historial.html')
+    mydata = {}
+    cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
+    print("Conexión exitosa!\n")
+    cursor = cnx.cursor()
+    query = ("SELECT hashtag, quantity, publication_date FROM possible_trends;")
+    cursor.execute(query)
+    for (hashtag, quantity, date) in cursor:
+        mydata[hashtag]=[quantity, str(date)]
 
+    return render_template('historial.html', dataSet = mydata)
+
+
+@app.route("/filterHashtag", methods = ['POST', 'GET'])
+def filterHashtag():
+    uniqueH = request.form['filter']
+    cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
+    print("Conexión exitosa!\n")
+    cursor = cnx.cursor()
+    query = ("SELECT hashtag, quantity, publication_date FROM possible_trends WHERE hashtag = %s;")
+    cursor.execute(query, (uniqueH))
+    mydata = cursor.fetchall()
+    for x in mydata:
+        print (x)
 
 
 
