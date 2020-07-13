@@ -53,11 +53,11 @@ try:
           cursor.execute(query,data_query)
           cnx.commit()
 
-   print("Querys efectuadas correctamente...")
 
 
   #Cerramos el programa para que el sh pueda ejecutar el siguiente
   #sys.exit()
+  print("Querys efectuadas correctamente...")
 
 except mysql.connector.Error as err:
   if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -65,6 +65,7 @@ except mysql.connector.Error as err:
   elif err.errno == errorcode.ER_BAD_DB_ERROR:
     print("Database does not exist")
   else:
+    print("Un pequeño error, pero los datos han sido almacenados de igual forma")
     print("Error: ",err)
 
 else:

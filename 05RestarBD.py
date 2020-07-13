@@ -7,6 +7,7 @@ About: Restart BD to zero values for improve the day work
 import os
 import mysql.connector
 from mysql.connector import errorcode
+import json
 
 # Cargamos las credenciales
 with open('credentialsDB.json') as file:
