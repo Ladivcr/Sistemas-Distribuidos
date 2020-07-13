@@ -24,7 +24,7 @@ PATH='/home/ladiv/github/Sistemas-Distribuidos/tweets'
 
 # Cargamos las credenciales
 with open('credentialsDB.json') as file:
-    credentials = json.load(file)    
+    credentials = json.load(file)
 
 # Seleccionamos las credenciales
 userDB = credentials["credentials"][0]["user"]
@@ -38,14 +38,14 @@ try:
   print("Conexión exitosa!\n")
   cursor = cnx.cursor()
   query = ("INSERT INTO possible_trends(hashtag, quantity, publication_date) VALUES(%s, %s, %s)")
-  
+
   # Leemos los archivos json en nuestro directorio
-  files = os.listdir(PATH) 
+  files = os.listdir(PATH)
   for x in files:
-      archivo = open(PATH+"/"+x, 'r') 
+      archivo = open(PATH+"/"+x, 'r')
       #myFile = archivo.read()
       myFile = json.load(archivo)
-      
+
       for key, value in myFile.items():
           #print(key, value[0])
           hashtag = key; quantity = value[0]; publication_date = value[1]
@@ -53,12 +53,12 @@ try:
           cursor.execute(query,data_query)
           cnx.commit()
 
-      #print("Querys efectuadas correctamente...")
-  print("Termina proceso de ALMACENAMIENTO...")
-          
+   print("Querys efectuadas correctamente...")
+
+
   #Cerramos el programa para que el sh pueda ejecutar el siguiente
   #sys.exit()
-  
+
 except mysql.connector.Error as err:
   if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
     print("Something is wrong with your user name or password")
@@ -66,7 +66,7 @@ except mysql.connector.Error as err:
     print("Database does not exist")
   else:
     print("Error: ",err)
-    
+
 else:
   cnx.close()
   #print("\nConexión cerrada exitosamente!\nNo a sido posible almacenar los datos...")

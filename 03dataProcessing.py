@@ -93,7 +93,7 @@ name_fig = now.strftime('/home/ladiv/github/Sistemas-Distribuidos/static/graphic
 plt.savefig(name_fig, bbox_inches='tight')
 #plt.show()
 #sys.exit()
-print("Termina PROCESAMIENTO DE DATOS...")
+print("Imagen generada y guardada con éxito...")
 
 #NOTA PARA EL AUTOR: Necesito borrar cada día los registros realizados en la base de datos
 #Ya que las tendencias son por días por lo que no vale la pena guardarlas más de un día.

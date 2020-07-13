@@ -25,37 +25,43 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
-
-
-
-
 @app.route("/historial-tendencias")
 def graph_page():
-    mydata = {}
+    #mydata2 = {}
     cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
     print("Conexión exitosa!\n")
     cursor = cnx.cursor()
     query = ("SELECT hashtag, quantity, publication_date FROM possible_trends;")
     cursor.execute(query)
+    contador = 0
+    mydata = []
+
     for (hashtag, quantity, date) in cursor:
-        mydata[hashtag]=[quantity, str(date)]
-
+        #mydata2[hashtag]=[quantity, str(date)]
+        mydata.append([hashtag, quantity, str(date)])
+        contador += 1
+        if contador == 8:
+            break
+    #print(mydata2)
     return render_template('historial.html', dataSet = mydata)
-
 
 @app.route("/filterHashtag", methods = ['POST', 'GET'])
 def filterHashtag():
     uniqueH = request.form['filter']
+    print(uniqueH)
     cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
     print("Conexión exitosa!\n")
     cursor = cnx.cursor()
     query = ("SELECT hashtag, quantity, publication_date FROM possible_trends WHERE hashtag = %s;")
-    cursor.execute(query, (uniqueH))
-    mydata = cursor.fetchall()
-    for x in mydata:
-        print (x)
-
-
+    cursor.execute(query, (uniqueH,))
+    cursor.fetchone()
+    #mydata = {}
+    mydata = []
+    for (hashtag, quantity, date) in cursor:
+        #mydata[hashtag]=[quantity, str(date)]
+        mydata.append([hashtag, quantity, str(date)])
+    return render_template('historial.html', dataSet = mydata)
+    
 
 # Función principal
 if __name__ == "__main__":
