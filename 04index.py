@@ -1,3 +1,9 @@
+#!/usr/bin/env python3
+#-*- coding: utf-8 -*-
+"""
+@uthor: José Vidal Cardona Rosas
+About: Work in back-end for the control of web page
+"""
 # Importamos la librería
 from flask import Flask, render_template, request
 import json
@@ -28,13 +34,18 @@ def index():
 @app.route("/historial-tendencias")
 def graph_page():
     #mydata2 = {}
-    cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
-    print("Conexión exitosa!\n")
-    cursor = cnx.cursor()
-    query = ("SELECT hashtag, quantity, publication_date FROM possible_trends;")
-    cursor.execute(query)
+    try:
+        cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
+        print("Conexión exitosa!\n")
+        cursor = cnx.cursor()
+        query = ("SELECT hashtag, quantity, publication_date FROM possible_trends;")
+        cursor.execute(query)
+    except:
+        print("No a sido posible establecer conexión/hacer la consulta")
+
     contador = 0
     mydata = []
+    #datos = cursor.fetchall()
 
     for (hashtag, quantity, date) in cursor:
         #mydata2[hashtag]=[quantity, str(date)]
@@ -42,26 +53,30 @@ def graph_page():
         contador += 1
         if contador == 8:
             break
-    #print(mydata2)
+
+            #print(mydata2)
     return render_template('historial.html', dataSet = mydata)
 
 @app.route("/filterHashtag", methods = ['POST', 'GET'])
 def filterHashtag():
     uniqueH = request.form['filter']
-    print(uniqueH)
-    cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
-    print("Conexión exitosa!\n")
-    cursor = cnx.cursor()
-    query = ("SELECT hashtag, quantity, publication_date FROM possible_trends WHERE hashtag = %s;")
-    cursor.execute(query, (uniqueH,))
-    cursor.fetchone()
+    try:
+        cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
+        print("Conexión exitosa!\n")
+        cursor = cnx.cursor()
+        query = ("SELECT hashtag, quantity, publication_date FROM possible_trends WHERE hashtag = %s;")
+        cursor.execute(query, (uniqueH,))
+        cursor.fetchone()
+    except:
+        print("No a sido posible establecer conexión/realizar la consulta")
+
     #mydata = {}
     mydata = []
     for (hashtag, quantity, date) in cursor:
         #mydata[hashtag]=[quantity, str(date)]
         mydata.append([hashtag, quantity, str(date)])
     return render_template('historial.html', dataSet = mydata)
-    
+
 
 # Función principal
 if __name__ == "__main__":

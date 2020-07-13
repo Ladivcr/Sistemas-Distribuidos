@@ -37,7 +37,7 @@ try:
   cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
   print("Conexión exitosa!\n")
   cursor = cnx.cursor()
-  query = ("INSERT INTO possible_trends(hashtag, quantity, publication_date) VALUES(%s, %s, %s)")
+  query = ("INSERT INTO possible_trends(hashtag, quantity, publication_date) VALUES(%s, %s, %s);")
 
   # Leemos los archivos json en nuestro directorio
   files = os.listdir(PATH)
