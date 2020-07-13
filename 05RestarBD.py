@@ -8,6 +8,16 @@ import os
 import mysql.connector
 from mysql.connector import errorcode
 
+# Cargamos las credenciales
+with open('credentialsDB.json') as file:
+    credentials = json.load(file)
+
+# Seleccionamos las credenciales
+userDB = credentials["credentials"][0]["user"]
+passwordDB = credentials["credentials"][0]["password"]
+hostDB = credentials["credentials"][0]["host"]
+nameDB = credentials["credentials"][0]["database"]
+
 try:
   cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
   print("Conexión exitosa!\n")
