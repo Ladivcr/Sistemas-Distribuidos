@@ -52,7 +52,7 @@ GNU General Public License v3.0
 > If you don't have credencial, I will send my credencial in an Email (Just if you are my teacher or his assistant) 
 * Open a terminal 
 * Write: ./00runTrends.sh 
-* After this you start to get the data from Twitter automatically
+* After this, you start to get the data from Twitter automatically
 > In this step, you should have already put your credentials in the code
 * Press Enter
 
