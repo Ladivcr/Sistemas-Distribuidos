@@ -25,7 +25,7 @@ try:
   cursor = cnx.cursor()
   query = ("DELETE FROM possible_trends;")
   cursor.execute(query)
-  print("Base de datos reiniciada...")
+  print("Base de datos reiniciada...\nCero registros en la base de datos")
   cnx.commit()
   cnx.close()
 

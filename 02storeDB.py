@@ -57,7 +57,7 @@ try:
 
   #Cerramos el programa para que el sh pueda ejecutar el siguiente
   #sys.exit()
-  print("Querys efectuadas correctamente...")
+  print("Registros efectuados correctamente...")
 
 except mysql.connector.Error as err:
   if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:

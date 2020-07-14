@@ -40,8 +40,13 @@ def graph_page():
         cursor = cnx.cursor()
         query = ("SELECT hashtag, quantity, publication_date FROM possible_trends;")
         cursor.execute(query)
-    except:
-        print("No a sido posible establecer conexión/hacer la consulta")
+    except mysql.connector.Error as err:
+      if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        print("Something is wrong with your user name or password")
+      elif err.errno == errorcode.ER_BAD_DB_ERROR:
+        print("Database does not exist")
+      else:
+        print("Error: ",err)
 
     contador = 0
     mydata = []
@@ -51,13 +56,13 @@ def graph_page():
         #mydata2[hashtag]=[quantity, str(date)]
         mydata.append([hashtag, quantity, str(date)])
         contador += 1
-        if contador == 8:
+        if contador == 9:
             break
 
             #print(mydata2)
     return render_template('historial.html', dataSet = mydata)
 
-@app.route("/filterHashtag", methods = ['POST', 'GET'])
+@app.route("/filterHashtag", methods = ['POST'])
 def filterHashtag():
     uniqueH = request.form['filter']
     try:
@@ -67,8 +72,13 @@ def filterHashtag():
         query = ("SELECT hashtag, quantity, publication_date FROM possible_trends WHERE hashtag = %s;")
         cursor.execute(query, (uniqueH,))
         cursor.fetchone()
-    except:
-        print("No a sido posible establecer conexión/realizar la consulta")
+    except mysql.connector.Error as err:
+      if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        print("Something is wrong with your user name or password")
+      elif err.errno == errorcode.ER_BAD_DB_ERROR:
+        print("Database does not exist")
+      else:
+        print("Error: ",err)
 
     #mydata = {}
     mydata = []
@@ -77,6 +87,34 @@ def filterHashtag():
         mydata.append([hashtag, quantity, str(date)])
     return render_template('historial.html', dataSet = mydata)
 
+@app.route("/displayHashtag", methods = ['POST'])
+def displayHashtag():
+    values = request.form['values']
+    button = request.form['submit_button']
+    print(values, type(values) , button, type(button))
+    try:
+        cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
+        print("Conexión exitosa!\n")
+        cursor = cnx.cursor()
+        query = ("SELECT hashtag, quantity, publication_date FROM possible_trends")
+        cursor.execute(query)
+
+    except mysql.connector.Error as err:
+      if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        print("Something is wrong with your user name or password")
+      elif err.errno == errorcode.ER_BAD_DB_ERROR:
+        print("Database does not exist")
+      else:
+        print("Error: ",err)
+
+    #mydata = {}
+    mydata = []
+    for (hashtag, quantity, date) in cursor:
+        #mydata[hashtag]=[quantity, str(date)]
+        mydata.append([hashtag, quantity, str(date)])
+
+    # Tengo que desplegar dado un cierto rango
+    return render_template('historial.html')
 
 # Función principal
 if __name__ == "__main__":
