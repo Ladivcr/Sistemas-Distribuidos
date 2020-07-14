@@ -38,10 +38,7 @@ GNU General Public License v3.0
 * **Matplotlib: To generate the image**
 > pip3 install  matplotlib
 * **mysql: To store the data**
-> *if you want to do some tests you need to install mysql in your computer and make Data Base. To interact with the database from python you need a database manager (there are others, but here is one)
-
 > pip3 install MySQLdb
-
 * **Tweepy: To get the data from Twitter**
 > pip3 install tweepy
 
@@ -52,9 +49,9 @@ GNU General Public License v3.0
 > If you don't have credencial, I will send my credencial in an Email (Just if you are my teacher or his assistant) 
 * Open a terminal 
 * Write: ./00runTrends.sh 
-* After this, you start to get the data from Twitter automatically
 > In this step, you should have already put your credentials in the code
 * Press Enter
+* After this, you start to get the data from Twitter automatically
 
 **Note:** If you don't have credencials from Twitter, you will need to create a development account on [Twitter](https://developer.twitter.com/) :+1:
 
@@ -63,6 +60,7 @@ GNU General Public License v3.0
 
 * Open a terminal 
 * Write: python3 04index.py
+* Press Enter
 > After this comand, the terminal display the addres for the web page
 * Copy the address
 * Paste in a browser and...
@@ -77,6 +75,7 @@ GNU General Public License v3.0
 You need to create a Database as follow:
 
 * > CREATE DATA BASE trends;
+* > USE trends;
 * > CREATE TABLE possible_trends(hashtag VARCHAR (280), quantity INT, publication_date DATE);
 
 # Abstract
