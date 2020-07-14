@@ -42,12 +42,17 @@ GNU General Public License v3.0
 
 > pip3 install MySQLdb
 
+* **Tweepy: To get the data from Twitter**
+> pip3 install tweepy
+
+**Now, you have the necessary libraries. Follow the next steps for use the project** 
 * Clone or download this [project](https://github.com/Ladivcr/Sistemas-Distribuidos.git) 
 > The project use some librarys, so, you need to install this librarys for optimal use. 
 > You will need to use some credencial from API Twitter, If you have it you can put it your credencial in the code. 
 > If you don't have credencial, I will send my credencial in an Email (Just if you are my teacher or his assistant) 
 * Open a terminal 
 * Write: ./00runTrends.sh 
+* After this you start to get the data from Twitter automatically
 > In this step, you should have already put your credentials in the code
 * Press Enter
 
