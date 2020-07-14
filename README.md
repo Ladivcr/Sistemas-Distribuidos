@@ -93,4 +93,6 @@ some range.
 Our project is not over yet
 
 ## Bibliography
-We can did it with helped from [documentation](https://tweepy.readthedocs.io/en/v3.5.0/index.html#)
+We can did it with some help.
+To get data: [documentation about tweepy](https://tweepy.readthedocs.io/en/v3.5.0/index.html#) 
+To visualize web page: [documentation about Flask](https://flask.palletsprojects.com/en/1.1.x/)
