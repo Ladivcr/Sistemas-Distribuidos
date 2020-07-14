@@ -46,7 +46,16 @@ GNU General Public License v3.0
 **Note:** If you don't have credencials from Twitter, you will need to create a development account on [Twitter](https://developer.twitter.com/) :+1:
 
 **Extra Note:** You need to change some paths in the code, because the paths are paths in my personal computer.
-
+## to view the page
+* Open a terminal 
+* Write: python3 04index.py
+> After this comand, the terminal display the addres for the web page
+* Copy the address
+* Paste in a browser
+# You can view something like: 
+![mainPage](resources/mainPage.png)
+![secondPage](resources/secondPage.png)
+![filterPage](resources/filterPage.png)
 ## About our data base
 
 You need to create a Database as follow:
