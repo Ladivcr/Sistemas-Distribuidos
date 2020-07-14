@@ -2,17 +2,17 @@
 - Monserrat Esperanza Alvaréz 
 - José Vidal Cardona Rosas 
 
-## Contact information
+# Contact information
 - esperanzaalvarez120@gmail.com 
 - vrosas832@gmail.com
 
-## Type of licence
+# Type of licence
 GNU General Public License v3.0
     
-## General objectives
+# General objectives
 * Identify possible trends Latin America
       
-## Software Tools
+# Software Tools
 * Twitter API
 * mysql Library
 * json Library
@@ -21,27 +21,25 @@ GNU General Public License v3.0
 * sys Library
 * Flask Library
 
-
-
-## Data Source
+# Data Source
 * Twitter
 
-## General system architecture 
+# General system architecture 
 * Data source: Twitter
 * Storage system: Mysql
 * Processing system: Python, Tweepy, json and Mysql
 * Data visualization: matplotlib.pyplot
 * View Data: Python - Flask, HTML and CSS
 
-## Install and use
-# Before, some libraries that you need
-**Flask: web page**
+# Install and use
+## Before, some libraries that you need
+* **Flask: web page**
 > pip3 install Flask
-**Matplotlib: To generate the image**
+* **Matplotlib: To generate the image**
 > pip3 install  matplotlib
-**mysql: To store the data**
-* if you want to do some tests you need to install mysql in your computer and make Data Base 
-* To interact with the database from python you need a database manager (there are others, but here is one)
+* **mysql: To store the data**
+> *if you want to do some tests you need to install mysql in your computer and make Data Base. To interact with the database from python you need a database manager (there are others, but here is one)
+
 > pip3 install MySQLdb
 
 * Clone or download this [project](https://github.com/Ladivcr/Sistemas-Distribuidos.git) 
@@ -76,7 +74,7 @@ You need to create a Database as follow:
 * > CREATE DATA BASE trends;
 * > CREATE TABLE possible_trends(hashtag VARCHAR (280), quantity INT, publication_date DATE);
 
-## Abstract
+# Abstract
     Currently, we have the power of social media for communication in real time
     and the principal use is communication. 
     But we can give a second use all this tools on different fields like e-commerce, 
@@ -86,15 +84,15 @@ You need to create a Database as follow:
     the "Tuit". So we can do  Web scraping for get this different kinds data, 
     clean the data and processing the data and finally try to identify a trend.
 
-## Methodology
+# Methodology
 Extreme programming 
 
-## Implementation and tests
+# Implementation and tests
 We ran our code for get some tweets with filter per geographical coordinates
 and we had lucky because we could catch many tweets but, we wanted to try our others
 codes (02 and 03) so, we stored this tweets and plot this tweets. 
 ## Results
-# Storage tweets 
+## Storage tweets 
 ![tuit](resources/mysql.png)
 # Plot tweets
 ![code](resources/possible_trends-15-05-2020-19-43-46.png)
@@ -102,10 +100,10 @@ codes (02 and 03) so, we stored this tweets and plot this tweets.
 As we can see, there are many tweets because when we did the query, we didn't specify 
 some range. 
 
-## Conclusions
+# Conclusions
 Our project is not over yet
 
-## Bibliography
+# Bibliography
 We can did it with some help.
 * To get data: [documentation about tweepy](https://tweepy.readthedocs.io/en/v3.5.0/index.html#) 
 * To visualize web page: [documentation about Flask](https://flask.palletsprojects.com/en/1.1.x/)
