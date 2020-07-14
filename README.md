@@ -70,9 +70,11 @@ GNU General Public License v3.0
 ![secondPage](resources/secondPage.png)
 ![filterPage](resources/filterPage.png)
 
-## About our data base
+## About our Data Base
+Before, you need to install Server SQL in your machine
+* > sudo apt install mysql-server
 
-You need to create a Database as follow:
+After the install and config, follow the steps for create the Data Base as follow:
 
 * > CREATE DATA BASE trends;
 * > USE trends;
