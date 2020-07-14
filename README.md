@@ -47,11 +47,16 @@ GNU General Public License v3.0
 
 **Extra Note:** You need to change some paths in the code, because the paths are paths in my personal computer.
 ## to view the page
+**Note:** Before this, you need to install Flask for run the web page. 
+> If you don't have Flask library run the command:
+* pip3 install Flask
+> If you have Flask library, just ignore the previous step
 * Open a terminal 
 * Write: python3 04index.py
 > After this comand, the terminal display the addres for the web page
 * Copy the address
-* Paste in a browser
+* Paste in a browser and...
+
 # You can view something like: 
 ![mainPage](resources/mainPage.png)
 ![secondPage](resources/secondPage.png)
@@ -94,5 +99,5 @@ Our project is not over yet
 
 ## Bibliography
 We can did it with some help.
-To get data: [documentation about tweepy](https://tweepy.readthedocs.io/en/v3.5.0/index.html#) 
-To visualize web page: [documentation about Flask](https://flask.palletsprojects.com/en/1.1.x/)
+* To get data: [documentation about tweepy](https://tweepy.readthedocs.io/en/v3.5.0/index.html#) 
+* To visualize web page: [documentation about Flask](https://flask.palletsprojects.com/en/1.1.x/)
