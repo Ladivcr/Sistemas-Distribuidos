@@ -11,9 +11,9 @@
     <input type = "text" name="filter" class="form-control mr-sm-2" type="search" placeholder="¿Buscas un hashtag?" >
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
   </form>
-  <form  action="/historial-tendencias" method="get">
+<!--  <form  action="/historial-tendencias" method="get">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Ver todos los hashtags</button>
-  </form>
+  </form> -->
 </nav>
 
   <table class="table">
@@ -45,9 +45,12 @@
       <option value="63,72">63-72</option>
       <option value="72,81">72-81</option>
       <option value="81,90">81-90</option>
+      <option value="90,99">90-99</option>
     </select>
-    <input type="submit" name="submit_button" value="Buscar">
+    <input type="submit" name="submit_button" value="Mostrar intervalo seleccionado">
   </form>
+  <p align = "center">Los datos se borran todos los días a las 12:00 A.M (UTC)
+    de la base de datos y la recolección empieza nuevamente a las 12:01 AM (UTC)</p>
     <!--<div class="btn-group" role="group" aria-label="Basic example">
       <form   action="" method="get">
         <button type="button" class="btn btn-primary"><</button>
