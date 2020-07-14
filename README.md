@@ -32,7 +32,7 @@ GNU General Public License v3.0
 * View Data: Python - Flask, HTML and CSS
 
 # Install and use
-## Before, some libraries that you need
+## Some libraries that you need
 * **Flask: web page**
 > pip3 install Flask
 * **Matplotlib: To generate the image**
@@ -41,6 +41,17 @@ GNU General Public License v3.0
 > pip3 install MySQLdb
 * **Tweepy: To get the data from Twitter**
 > pip3 install tweepy
+
+## About our Data Base
+Before, you need to install Server SQL in your machine
+* > sudo apt install mysql-server
+
+After the install and config, follow the steps for create the Data Base as follow:
+
+* > CREATE DATA BASE trends;
+* > USE trends;
+* > CREATE TABLE possible_trends(hashtag VARCHAR (280), quantity INT, publication_date DATE);
+
 
 **Now, you have the necessary libraries. Follow the next steps for use the project** 
 * Clone or download this [project](https://github.com/Ladivcr/Sistemas-Distribuidos.git) 
@@ -70,15 +81,6 @@ GNU General Public License v3.0
 ![secondPage](resources/secondPage.png)
 ![filterPage](resources/filterPage.png)
 
-## About our Data Base
-Before, you need to install Server SQL in your machine
-* > sudo apt install mysql-server
-
-After the install and config, follow the steps for create the Data Base as follow:
-
-* > CREATE DATA BASE trends;
-* > USE trends;
-* > CREATE TABLE possible_trends(hashtag VARCHAR (280), quantity INT, publication_date DATE);
 
 # Abstract
     Currently, we have the power of social media for communication in real time
