@@ -38,7 +38,7 @@ def graph_page():
         cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
         print("Conexión exitosa!\n")
         cursor = cnx.cursor()
-        query = ("SELECT hashtag, quantity, publication_date FROM possible_trends;")
+        query = ("SELECT hashtag, quantity, publication_date FROM possible_trends ORDER BY quantity DESC;")
         cursor.execute(query)
     except mysql.connector.Error as err:
       if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -90,13 +90,15 @@ def filterHashtag():
 @app.route("/displayHashtag", methods = ['POST'])
 def displayHashtag():
     values = request.form['values']
+    inicio, fin = values.split(",")
+    inicio = int(inicio); fin = int(fin)
     button = request.form['submit_button']
-    print(values, type(values) , button, type(button))
+
     try:
         cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
         print("Conexión exitosa!\n")
         cursor = cnx.cursor()
-        query = ("SELECT hashtag, quantity, publication_date FROM possible_trends")
+        query = ("SELECT hashtag, quantity, publication_date FROM possible_trends ORDER BY quantity DESC;")
         cursor.execute(query)
 
     except mysql.connector.Error as err:
@@ -113,8 +115,12 @@ def displayHashtag():
         #mydata[hashtag]=[quantity, str(date)]
         mydata.append([hashtag, quantity, str(date)])
 
+    aux = []
+    for value in range(inicio, fin, 1):
+        aux.append(mydata[value])
+
     # Tengo que desplegar dado un cierto rango
-    return render_template('historial.html')
+    return render_template('historial.html', dataSet = aux)
 
 # Función principal
 if __name__ == "__main__":
