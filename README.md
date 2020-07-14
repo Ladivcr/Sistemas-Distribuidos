@@ -34,6 +34,16 @@ GNU General Public License v3.0
 * View Data: Python - Flask, HTML and CSS
 
 ## Install and use
+# Before, some libraries that you need
+**Flask: web page**
+> pip3 install Flask
+**Matplotlib: To generate the image**
+> pip3 install  matplotlib
+**mysql: To store the data**
+* if you want to do some tests you need to install mysql in your computer and make Data Base 
+* To interact with the database from python you need a database manager (there are others, but here is one)
+> pip3 install MySQLdb
+
 * Clone or download this [project](https://github.com/Ladivcr/Sistemas-Distribuidos.git) 
 > The project use some librarys, so, you need to install this librarys for optimal use. 
 > You will need to use some credencial from API Twitter, If you have it you can put it your credencial in the code. 
@@ -47,10 +57,7 @@ GNU General Public License v3.0
 
 **Extra Note:** You need to change some paths in the code, because the paths are paths in my personal computer.
 ## to view the page
-**Note:** Before this, you need to install Flask for run the web page. 
-> If you don't have Flask library run the command:
-* pip3 install Flask
-> If you have Flask library, just ignore the previous step
+
 * Open a terminal 
 * Write: python3 04index.py
 > After this comand, the terminal display the addres for the web page
@@ -61,6 +68,7 @@ GNU General Public License v3.0
 ![mainPage](resources/mainPage.png)
 ![secondPage](resources/secondPage.png)
 ![filterPage](resources/filterPage.png)
+
 ## About our data base
 
 You need to create a Database as follow:
