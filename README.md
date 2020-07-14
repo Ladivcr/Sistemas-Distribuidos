@@ -25,11 +25,12 @@ GNU General Public License v3.0
 ## Data Source
 * Twitter
 
-## General architecture of the system
+## General system architecture 
 * Data source: Twitter
 * Storage system: Mysql
 * Processing system: Python, Tweepy, json and Mysql
 * Data visualization: matplotlib.pyplot
+* View Data: Python - Flask, HTML and CSS
 
 ## Install and use
 * Clone or download this [project](https://github.com/Ladivcr/Sistemas-Distribuidos.git) 
