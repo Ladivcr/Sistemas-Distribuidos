@@ -105,13 +105,22 @@ class TweetsListener(tweepy.StreamListener):
         # Debo de modificar esta instruccion sino el programa se correra esto monton de veces cuando se
         # alcance el umbral de tiempo
 
-        if elapsed_time_seg >= 120:
+        if elapsed_time_seg >= 480:
 
             # Guardar los tuits
             myJSON = json.dumps(hashtags)
             now = datetime.datetime.now()
             #día-mes-año - horas-minutos-segundos
-            filename = now.strftime('tweets/possible_trend-%d-%m-%Y-%H-%M-%S.json')
+            # Para un mejor orden de almacenamiento, nos basaremos
+            # en la cantidad de archivos existentes
+            PATH='/home/ladiv/github/Sistemas-Distribuidos/tweets'
+            # Leemos los archivos json en nuestro directorio
+            files = os.listdir(PATH)
+            controlador = (len(files))+1
+            filename = now.strftime('tweets/{0}-possible_trend-%d-%m-%Y-%H-%M.json'.format(controlador))
+            #filename = now.strftime('tweets/possible_trend-%d-%m-%Y-%H-%M.json')
+
+            #filename = str(controlador)+'-'+filename
             # Guardamos nuestros datos en un archivo json
             with open(filename,"w") as file:
                 file.write(myJSON)
@@ -162,6 +171,7 @@ class TweetsListener(tweepy.StreamListener):
                             file.write(myJSON)
 
                         file.close()
+                        del(hashtag[claveSalvar])
                         print("Tweets escritos en JSON correctamente...")
 
                         # Una vez escritos los datos en el archivo JSON

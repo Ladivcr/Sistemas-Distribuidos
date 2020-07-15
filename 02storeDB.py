@@ -14,11 +14,12 @@ import datetime
 import subprocess
 import fnmatch
 import sys
+import time
 
 
 #PATH = '/home/galimatias/public_html/static/'
 #PATH de trabajo
-PATH='/home/ladiv/github/Sistemas-Distribuidos/tweets'
+PATH='/home/ladiv/github/Sistemas-Distribuidos/tweets/'
 #PATH para respaldo
 #RPATH = '/home/ladiv/git/Sistemas-Distribuidos/json/backup'
 
@@ -41,23 +42,44 @@ try:
 
   # Leemos los archivos json en nuestro directorio
   files = os.listdir(PATH)
-  for x in files:
-      archivo = open(PATH+"/"+x, 'r')
-      #myFile = archivo.read()
-      myFile = json.load(archivo)
+  # Debido a que esto nos regresa una lista
+  # la ordenaremos y gracias al identificador (en función de la Cantidad
+  # de archivos) que hemos añadido al inicio del nombre de cada archivo
+  # garantizamos que el último elemento de la lista ordenada es el más nuevo
+  files = sorted(files)
+  print("Lista de archivos: ",files)
+  print("\nArchivo seleccionado: ",files[-1])
+  archivo = open(PATH+files[-1], 'r')
+  #print(archivo)
+  myFile = json.load(archivo)
 
-      for key, value in myFile.items():
+  for key, value in myFile.items():
+      hashtag = key; quantity = value[0]; publication_date = value[1]
+      data_query = (hashtag, quantity, publication_date)
+      cursor.execute(query, data_query)
+      cnx.commit()
+
+  print("Registros efectuados correctamente...")
+
+  #for x in files:
+      #archivo = open(PATH+x, 'r')
+      #myFile = archivo.read()
+      #print(archivo)
+      #myFile = json.load(archivo)
+
+      #for key, value in myFile.items():
           #print(key, value[0])
-          hashtag = key; quantity = value[0]; publication_date = value[1]
-          data_query = (hashtag, quantity, publication_date)
-          cursor.execute(query,data_query)
-          cnx.commit()
+          #hashtag = key; quantity = value[0]; publication_date = value[1]
+          #data_query = (hashtag, quantity, publication_date)
+          #cursor.execute(query,data_query)
+          #cnx.commit()
+          #break
 
 
 
   #Cerramos el programa para que el sh pueda ejecutar el siguiente
   #sys.exit()
-  print("Registros efectuados correctamente...")
+  #print("Registros efectuados correctamente...")
 
 except mysql.connector.Error as err:
   if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
