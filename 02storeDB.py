@@ -47,9 +47,25 @@ try:
   # de archivos) que hemos añadido al inicio del nombre de cada archivo
   # garantizamos que el último elemento de la lista ordenada es el más nuevo
   files = sorted(files)
+
+
   print("Lista de archivos: ",files)
-  print("\nArchivo seleccionado: ",files[-1])
-  archivo = open(PATH+files[-1], 'r')
+
+  aux = []
+  for name in files:
+      value = name.split("-")
+      print(name, value[0])
+      aux.append(( int(value[0]), name))
+
+  #print(aux)
+  #print("")
+  aux.sort(key=lambda ordenar: ordenar[0])
+  #print(aux)
+  #print("")
+  files = aux[-1][1]
+
+  print("\nArchivo seleccionado: ",files)
+  archivo = open(PATH+files, 'r')
   #print(archivo)
   myFile = json.load(archivo)
 

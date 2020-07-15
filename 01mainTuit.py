@@ -27,7 +27,7 @@ time_vector = []
 # Lista para guardar los hashtags
 tag_vector = []
 # Control de las ejecuciones de código
-#saveValues = []
+saveValues = []
 # Cargamos las credenciales
 with open('credentials.json') as file:
     credentials = json.load(file)
@@ -144,14 +144,14 @@ class TweetsListener(tweepy.StreamListener):
         # --------------------------------------------------------------------------
 
         # hashtags[tag] = [1, date] manera en que son almacenados los datos
-        """else:
+        else:
             tmpDic = {}
             try:
-                print("ENTRE 1")
+                #print("ENTRE 1")
 
-                valorSalvar = max(hashtags.values())
-                if int(valorSalvar[0]) >= 2:
-                    print("ENTRE 2")
+                valorSalvar = max(hashtags.values())[0]
+                if int(valorSalvar) >= 2:
+                    #print("ENTRE 2")
 
                     #claves = list(hashtags.keys())
                     #valores = list(dic.values())
@@ -160,37 +160,43 @@ class TweetsListener(tweepy.StreamListener):
                     print(hashtags, claveSalvar, valorSalvar)
                     # Corroboramos que la clave no haya sido ya añadida
                     if (claveSalvar not in saveValues):
-                        print("ENTRE 3")
+                        #print("ENTRE 3")
                         saveValues.append(claveSalvar)
                         # Guardar los tuits
                         myJSON = json.dumps(tmpDic)
                         # Guardamos nuestros datos en un archivo json
                         now = datetime.datetime.now()
-                        filename = now.strftime('tweets/possible_trend-%d-%m-%Y/%H-%M-%S.json')
+                        PATH='/home/ladiv/github/Sistemas-Distribuidos/tweets'
+                        files = os.listdir(PATH)
+                        controlador = (len(files))+1
+                        filename = now.strftime('tweets/{0}-possible_trend-%d-%m-%Y-%H-%M.json'.format(controlador))
+                        #filename = now.strftime('tweets/possible_trend-%d-%m-%Y/%H-%M-%S.json')
                         with open(filename,"w") as file:
                             file.write(myJSON)
 
                         file.close()
                         del(hashtag[claveSalvar])
-                        print("Tweets escritos en JSON correctamente...")
+                        print("\nTweets escritos en JSON correctamente...\n")
+                        os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py')
 
+                        os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py')
+                        print("Save values: ", saveValues)
                         # Una vez escritos los datos en el archivo JSON
                         # Procedemos a guardarlos en la base de datos
                         # Ejecutamos el código de almacenamiento
-                        try:
-                            print("ENTRE 4")
-                            os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py')
-                            print("Código de almacenamiento ejecutado con éxito...")
+                        #try:
+                            #print("ENTRE 4")
+                            #os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py')
 
-                            os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py')
-                            print("Código de procesamiento ejecutado con éxito...")
-                            print(saveValues)
-                        except:
-                            print("No se han podido ejecutar los códigos de almacenamiento y procesamiento")
+                            #os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py')
+                            #print(saveValues)
+                        #except:
+                            #print("No se han podido ejecutar los códigos de almacenamiento y procesamiento")
                     else:
-                        print("Save values: ",saveValues)
+                        pass
+                        #print("Save values: ",saveValues)
             except:
-                pass"""
+                pass
 
         # --------------------------------------
             # ----------------------------------------------------------------
