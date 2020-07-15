@@ -54,7 +54,7 @@ try:
   aux = []
   for name in files:
       value = name.split("-")
-      print(name, value[0])
+      #print(name, value[0])
       aux.append(( int(value[0]), name))
 
   #print(aux)

@@ -105,7 +105,7 @@ class TweetsListener(tweepy.StreamListener):
         # Debo de modificar esta instruccion sino el programa se correra esto monton de veces cuando se
         # alcance el umbral de tiempo
 
-        if elapsed_time_seg >= 480:
+        if elapsed_time_seg >= 680:
 
             # Guardar los tuits
             myJSON = json.dumps(hashtags)
