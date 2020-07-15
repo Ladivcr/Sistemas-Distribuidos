@@ -144,7 +144,7 @@ class TweetsListener(tweepy.StreamListener):
         # --------------------------------------------------------------------------
 
         # hashtags[tag] = [1, date] manera en que son almacenados los datos
-        else:
+        """else:
             tmpDic = {}
             try:
                 #print("ENTRE 1")
@@ -196,7 +196,7 @@ class TweetsListener(tweepy.StreamListener):
                         pass
                         #print("Save values: ",saveValues)
             except:
-                pass
+                pass"""
 
         # --------------------------------------
             # ----------------------------------------------------------------
