@@ -37,7 +37,7 @@ GNU General Public License v3.0
 > pip3 install Flask
 * **Matplotlib: To generate the image**
 > pip3 install  matplotlib
-* **mysql: To store the data**
+* **MySQL: To store the data**
 > pip3 install MySQLdb
 * **Tweepy: To get the data from Twitter**
 > pip3 install tweepy
