@@ -48,7 +48,7 @@ Before, you need to install Server SQL in your machine
 
 After the install and config, follow the steps for create the Data Base as follow:
 
-* > CREATE DATA BASE trends;
+* > CREATE DATABASE trends;
 * > USE trends;
 * > CREATE TABLE possible_trends(hashtag VARCHAR (280), quantity INT, publication_date DATE);
 
