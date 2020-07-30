@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block content %}
+<p lang="es" align = "center">Posible tendencia: <b>{{maxData[0]}}</b> con una cantidad de: <b>{{maxData[1]}}</b> replicaciones</p>
+
 <img  class="center" alt="Solvetic" alt="Responsive image" alt="Posibles tendencias del día" src="{{ url_for('static',filename='graphics/possible_trends.png')}}">
 <p align = "center">La gráfica se actualiza cada 30 minutos con las nuevas posibles tendencias
   que surgieron en ese lapso de tiempo</p>

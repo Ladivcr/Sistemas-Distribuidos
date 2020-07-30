@@ -29,7 +29,32 @@ app = Flask(__name__)
 @app.route("/")
 # Definimos la función para la ruta de la página principal
 def index():
-    return render_template("index.html")
+    try:
+        cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
+        print("Conexión exitosa!\n")
+        cursor = cnx.cursor()
+        query = ("SELECT hashtag, quantity, publication_date FROM possible_trends ORDER BY quantity DESC;")
+        #query2 = ("SELECT hashtag, quantity, publication_date FROM possible_trends WHERE quantity = (SELECT MAX(quantity) FROM possible_trends);")
+        cursor.execute(query)
+        #cursor2.execute(query2)
+
+    except mysql.connector.Error as err:
+        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+            print("Something is wrong with your user name or password")
+        elif err.errno == errorcode.ER_BAD_DB_ERROR:
+            print("Database does not exist")
+        else:
+            print("Error: ",err)
+
+    mydata = []
+    #datos = cursor.fetchall()
+
+    for (hashtag, quantity, date) in cursor:
+        #mydata2[hashtag]=[quantity, str(date)]
+        mydata.append([hashtag, quantity, str(date)])
+
+    print(mydata[0])
+    return render_template("index.html", maxData = mydata[0])
 
 @app.route("/historial-tendencias")
 def graph_page():
@@ -39,7 +64,10 @@ def graph_page():
         print("Conexión exitosa!\n")
         cursor = cnx.cursor()
         query = ("SELECT hashtag, quantity, publication_date FROM possible_trends ORDER BY quantity DESC;")
+        #query2 = ("SELECT hashtag, quantity, publication_date FROM possible_trends WHERE quantity = (SELECT MAX(quantity) FROM possible_trends);")
         cursor.execute(query)
+        #cursor2.execute(query2)
+
     except mysql.connector.Error as err:
       if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
         print("Something is wrong with your user name or password")
@@ -59,7 +87,6 @@ def graph_page():
         if contador == 9:
             break
 
-            #print(mydata2)
     return render_template('historial.html', dataSet = mydata)
 
 @app.route("/filterHashtag", methods = ['POST'])
