@@ -17,6 +17,7 @@ import os
 import time
 import subprocess
 
+STORE_TIME = 15*60 #sec
 
 # Tiempo para el control de la recepción de tuits (esta en segundos)
 start_time = time.time()
@@ -105,7 +106,7 @@ class TweetsListener(tweepy.StreamListener):
         # Debo de modificar esta instruccion sino el programa se correra esto monton de veces cuando se
         # alcance el umbral de tiempo
 
-        if elapsed_time_seg >= 680:
+        if elapsed_time_seg >= STORE_TIME:
 
             # Guardar los tuits
             myJSON = json.dumps(hashtags)

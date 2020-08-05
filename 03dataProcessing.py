@@ -12,7 +12,7 @@ import glob
 import datetime
 import subprocess
 import matplotlib
-#matplotlib.use('Agg') #Usamos el ambiente gráfico del sistema
+matplotlib.use('Agg') #Usamos el ambiente gráfico del sistema
 import matplotlib.pyplot as plt
 import sys
 
@@ -90,7 +90,7 @@ plt.yscale("linear")
 #plt.savefig(actual_day, bbox_inches='tight')
 # -------------------------------------
 #name_fig = now.strftime('/home/vdelaluz/git/Sistemas-Distribuidos/static/graphics/possible_trends.png')
-name_fig = now.strftime('/home/vdelaluz/public_html/gicc/static/cursos/2020-II/galimatias/static/graphics/possible_trends.png')
+name_fig = now.strftime('/home/vdelaluz/public_html/gicc/static/cursos/2020-II/galimatias/possible_trends.png')
 plt.savefig(name_fig, bbox_inches='tight')
 #plt.show()
 #sys.exit()
