@@ -1,0 +1,66 @@
+{% extends "formatoPrincipal.html" %}
+
+{% block content2 %}
+<title>Historial de tendencias MX</title>
+{% endblock %}
+
+{% block content %}
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand"><h2>hashtags del día</h2></a>
+  <form class="form-inline" action="/filterHashtag" method="post">
+    <input type = "text" name="filter" class="form-control mr-sm-2" type="search" placeholder="¿Buscas un hashtag?" >
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+  </form>
+<!--  <form  action="/historial-tendencias" method="get">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Ver todos los hashtags</button>
+  </form> -->
+</nav>
+
+  <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">hashtag</th>
+      <th scope="col">Cantidad</th>
+      <th scope="col">Día de publicación</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for value in dataSet %}
+    <tr>
+      <th>{{ value[0] }}</th>
+      <td>{{ value[1] }}</td>
+      <td>{{ value[2] }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+  <form action="/displayHashtag" method="post">
+    <select name="values" class="list">
+      <option value="0,9">0-9</option>
+      <option value="9,18">9-18</option>
+      <option value="18,27">18-27</option>
+      <option value="27,36">27-36</option>
+      <option value="36,45">36-45</option>
+      <option value="45,54">45-54</option>
+      <option value="54,63">54-63</option>
+      <option value="63,72">63-72</option>
+      <option value="72,81">72-81</option>
+      <option value="81,90">81-90</option>
+      <option value="90,99">90-99</option>
+    </select>
+    <input type="submit" name="submit_button" value="Mostrar intervalo seleccionado">
+  </form>
+  <p align = "center">Los datos se borran todos los días a las 12:00 A.M (UTC)
+    de la base de datos y la recolección empieza nuevamente a las 12:01 AM (UTC)</p>
+    <!--<div class="btn-group" role="group" aria-label="Basic example">
+      <form   action="" method="get">
+        <button type="button" class="btn btn-primary"><</button>
+        <button type="button" class="btn btn-light" disabled> - </button>
+
+      </form>
+      <form action = "" method="get">
+        <button type="button" class="btn btn-primary">></button>
+        <p align = "center">Los datos se borran todos los días a las 12:00 A.M (UTC)
+          de la base de datos y la recolección empieza nuevamente a las 12:01 AM (UTC)</p>
+      </form>
+    </div>-->
+{% endblock %}

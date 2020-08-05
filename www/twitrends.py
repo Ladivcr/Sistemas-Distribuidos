@@ -7,11 +7,11 @@ About: Work in back-end for the control of web page
 # Importamos la librería
 from flask import Flask, render_template, request
 import json
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 import mysql.connector
 from mysql.connector import errorcode
 # Cargamos las credenciales
-with open('credentialsDB.json') as file:
+with open('/home/vdelaluz/git/Sistemas-Distribuidos/credentialsDB.json') as file:
     credentials = json.load(file)
 
 # Seleccionamos las credenciales
