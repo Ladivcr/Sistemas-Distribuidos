@@ -1,9 +1,7 @@
 # Identifying possible trends on Twitter - MX
-- Monserrat Esperanza Alvaréz 
 - José Vidal Cardona Rosas 
 
 # Contact information
-- esperanzaalvarez120@gmail.com 
 - vrosas832@gmail.com
 
 # Type of licence
