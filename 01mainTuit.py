@@ -6,7 +6,7 @@ About: Get information from Twitter, precisely from Tweets.
 """
 
 import tweepy
-import twitter
+#import twitter
 import json
 import requests
 import datetime
@@ -113,7 +113,7 @@ class TweetsListener(tweepy.StreamListener):
             #día-mes-año - horas-minutos-segundos
             # Para un mejor orden de almacenamiento, nos basaremos
             # en la cantidad de archivos existentes
-            PATH='/home/ladiv/github/Sistemas-Distribuidos/tweets'
+            PATH='/home/vdelaluz/git/Sistemas-Distribuidos/tweets'
             # Leemos los archivos json en nuestro directorio
             files = os.listdir(PATH)
             controlador = (len(files))+1
@@ -127,10 +127,10 @@ class TweetsListener(tweepy.StreamListener):
 
             file.close()
             try:
-                os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/02storeDB.py')
+                os.system('python3 /home/vdelaluz/git/Sistemas-Distribuidos/02storeDB.py')
                 print("Código de almacenamiento ejecutado correctamente...")
 
-                os.system('python3 /home/ladiv/github/Sistemas-Distribuidos/03dataProcessing.py')
+                os.system('python3 /home/vdelaluz/git/Sistemas-Distribuidos/03dataProcessing.py')
                 print("Código de procesamiento ejecutado correctamente...")
             except:
                 print("\n\tNo se han podido ejecutar los códigos de almacenamiento y procesamiento de datos\n")

@@ -19,7 +19,7 @@ import time
 
 #PATH = '/home/galimatias/public_html/static/'
 #PATH de trabajo
-PATH='/home/ladiv/github/Sistemas-Distribuidos/tweets/'
+PATH='/home/vdelaluz/git/Sistemas-Distribuidos/tweets/'
 #PATH para respaldo
 #RPATH = '/home/ladiv/git/Sistemas-Distribuidos/json/backup'
 
