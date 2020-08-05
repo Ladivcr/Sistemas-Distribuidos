@@ -65,8 +65,8 @@ ax.set(xlabel='Tags', ylabel='Number of tweets', title=actual_date)
 #ax.plot(arr_temp, y, "-or")
 # Para etiquetar los puntos sólo hay que descomentar lo comentado en la parte de graficar
 # y comentar ax.plot(x,y) y plt.xticks
-ax.grid()
-ax.plot(x,y,"-or")
+#ax.grid()
+ax.bar(x, y, color = "b", align="center")
 plt.xticks(rotation=86)
 
 
