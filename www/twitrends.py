@@ -89,7 +89,7 @@ def graph_page():
 
     return render_template('historial.html', dataSet = mydata)
 
-@app.route("/filterHashtag", methods = ['POST'])
+@app.route("/historial-tendencias/filterHashtag", methods = ['POST'])
 def filterHashtag():
     uniqueH = request.form['filter']
     try:
@@ -114,7 +114,7 @@ def filterHashtag():
         mydata.append([hashtag, quantity, str(date)])
     return render_template('historial.html', dataSet = mydata)
 
-@app.route("/displayHashtag", methods = ['POST'])
+@app.route("/historial-tendencias/displayHashtag", methods = ['POST'])
 def displayHashtag():
     values = request.form['values']
     inicio, fin = values.split(",")

@@ -7,7 +7,7 @@
 {% block content %}
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand"><h2>hashtags del día</h2></a>
-  <form class="form-inline" action="/filterHashtag" method="post">
+  <form class="form-inline" action="/historial-tendencias/filterHashtag" method="post">
     <input type = "text" name="filter" class="form-control mr-sm-2" type="search" placeholder="¿Buscas un hashtag?" >
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
   </form>
@@ -33,7 +33,7 @@
     </tr>
     {% endfor %}
     </table>
-  <form action="/displayHashtag" method="post">
+  <form action="/historial-tendencias/displayHashtag" method="post">
     <select name="values" class="list">
       <option value="0,9">0-9</option>
       <option value="9,18">9-18</option>
