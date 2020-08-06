@@ -7,7 +7,7 @@
 # Type of licence
 GNU General Public License v3.0
     
-# General objectives
+# Resume
 * Identify possible trends Latin America
       
 # Software Tools
@@ -31,14 +31,12 @@ GNU General Public License v3.0
 
 # Install and use
 ## Some libraries that you need
-* **Flask: web page**
-> pip3 install Flask
-* **Matplotlib: To generate the image**
-> pip3 install  matplotlib
-* **MySQL: To store the data**
-> pip3 install MySQLdb
-* **Tweepy: To get the data from Twitter**
-> pip3 install tweepy
+```
+   pip3 install Flask
+   pip3 install matplotlib
+   pip3 install mysql-connector
+   pip3 install tweepy
+```
 
 ## About our Data Base
 Before, you need to install Server SQL in your machine
@@ -64,7 +62,6 @@ After the install and config, follow the steps for create the Data Base as follo
 
 **Note:** If you don't have credencials from Twitter, you will need to create a development account on [Twitter](https://developer.twitter.com/) :+1:
 
-**Extra Note:** You need to change some paths in the code, because the paths are paths in my personal computer.
 ## to view the page
 
 * Open a terminal 
