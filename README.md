@@ -9,6 +9,10 @@ GNU General Public License v3.0
     
 # Resume
 * Identify possible trends Latin America
+> This project was developed in Linux-Ubuntu, so, if you use Windows OS, maybe you will can have some 
+problems with .sh file, but, you can rewrite the code for use it. Suppose that you use Ubuntu OS, 
+with .sh you can use crontab and start to get Twets automatically. 
+**Note:** This project was put into production on a web server with a static directory. You can see it here: http://www.gicc.unam.mx/twitrends/
       
 # Software Tools
 * Twitter API
@@ -54,7 +58,7 @@ After the install and config, follow the steps for create the Data Base as follo
 > You will need to use some credencial from API Twitter, If you have it you can put it your credencial in the code. (Please read config.txt) 
 > If you don't have credencial, you can get it in: [Twitter developer](https://developer.twitter.com/en) 
 
-> After that you download/clone this project, you need to read the file: config.txt
+> After that you download/clone this project, <strong>you need to read the file: config.txt</strong>
 If you already read the file...
 * Open a terminal and write:
 ```
