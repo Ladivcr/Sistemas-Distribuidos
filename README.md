@@ -22,7 +22,7 @@ GNU General Public License v3.0
 # Data Source
 * Twitter
 
-# General system architecture 
+# Architecture 
 * Data source: Twitter
 * Storage system: Mysql
 * Processing system: Python, Tweepy, json and Mysql
