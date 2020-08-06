@@ -1,4 +1,4 @@
-# Identifying possible trends on Twitter - MX
+# Twitrends - Identifying possible trends on Twitter - MX
 - José Vidal Cardona Rosas 
 
 # Contact information
