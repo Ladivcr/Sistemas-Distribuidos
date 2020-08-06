@@ -35,7 +35,7 @@ try:
   cnx = mysql.connector.connect(user=userDB, password=passwordDB, host=hostDB, database=nameDB)
   print("Conexión exitosa!\n")
   cursor = cnx.cursor()
-  query = ("SELECT hashtag, quantity FROM possible_trends WHERE quantity >= 15 ORDER BY quantity;")
+  query = ("SELECT hashtag, quantity FROM possible_trends WHERE quantity >= 20 ORDER BY quantity;")
   cursor.execute(query)
   for (hashtag, quantity) in cursor:
       print(f"{hashtag}\t{quantity}")
