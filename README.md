@@ -55,7 +55,7 @@ After the install and config, follow the steps for create the Data Base as follo
 
 **Now, you have the necessary libraries. Follow the next steps for use the project** 
 * Clone or download this project: https://github.com/Ladivcr/Sistemas-Distribuidos.git 
-> You will need to use some credencial from API Twitter, If you have it you can put it your credencial in the code. (Please read config.txt) 
+> You will need to use some credencial from API Twitter. If you have it Please read config.txt 
 > If you don't have credencial, you can get it in: [Twitter developer](https://developer.twitter.com/en) 
 
 > After that you download/clone this project, <strong>you need to read the file: config.txt</strong>
