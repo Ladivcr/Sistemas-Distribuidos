@@ -50,24 +50,26 @@ After the install and config, follow the steps for create the Data Base as follo
 
 
 **Now, you have the necessary libraries. Follow the next steps for use the project** 
-* Clone or download this [project](https://github.com/Ladivcr/Sistemas-Distribuidos.git) 
-> The project use some librarys, so, you need to install this librarys for optimal use. 
-> You will need to use some credencial from API Twitter, If you have it you can put it your credencial in the code. 
-> If you don't have credencial, I will send my credencial in an Email (Just if you are my teacher or his assistant) 
-* Open a terminal 
-* Write: ./00runTrends.sh 
-> In this step, you should have already put your credentials in the code
-* Press Enter
-* After this, you start to get the data from Twitter automatically
+* Clone or download this project: https://github.com/Ladivcr/Sistemas-Distribuidos.git 
+> You will need to use some credencial from API Twitter, If you have it you can put it your credencial in the code. (Please read config.txt) 
+> If you don't have credencial, you can get it in: [Twitter developer](https://developer.twitter.com/en) 
 
-**Note:** If you don't have credencials from Twitter, you will need to create a development account on [Twitter](https://developer.twitter.com/) :+1:
-
+> After that you download/clone this project, you need to read the file: config.txt
+If you already read the file...
+* Open a terminal and write:
+```
+    ./00runTrends.sh
+```
+* After this, you start to get the data from Twitter automatically.
 ## to view the page
 
-* Open a terminal 
-* Write: python3 04index.py
-* Press Enter
-> After this comand, the terminal display the addres for the web page
+* Open a terminal and write: (Only if the project has not been mounted on a server)
+```
+    cd www/
+    python3 twitrends.py
+```
+
+> After this, the terminal display the addres for the web page 
 * Copy the address
 * Paste in a browser and...
 
