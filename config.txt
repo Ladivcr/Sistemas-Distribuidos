@@ -1,0 +1,65 @@
+####################################################
+####################################################
+#########    CONFIGURATION/CONFIGURACION   #########
+####################################################
+####################################################
+
+THIS CODE WAS DEVELOPED ON AND FOR: #Linux-Ubuntu# (But if you want, you can rewrite for Windows)
+
+IMPORTANT: This code/program/project can be put into production on an Apache Server.
+Just follow the steps from the next link:
+
+https://www.codementor.io/@abhishake/minimal-apache-configuration-for-deploying-a-flask-app-ubuntu-18-04-phu50a7ft
+
+# * AFTER TO CLONE OR DOWNLOAD THIS PROJECT * # You need to configure some things for optimal use
+
+############### CONFIGURATION - PATH #################
+#1
+code: 00runTrends.sh
+where: line/six-6 
+do: You need to change the PATH for your path where you save this project.
+#2
+code: 01mainTuit.py
+where: line/one hundred seventeen-117
+do: Change the PATH for your PATH after this you will see something like:
+	'/home/YourUser/DirectoryWhereYouCloneThisProject/Sistemas-Distribuidos/tweets'
+#3
+code: 01mainTuit.py
+where: line/one hundred thirty one-131
+do: Change the PATH for your PATH, something like:
+	 'python3 /home/YourUser/DirectoryWhereYouCloneThisProject/Sistemas-Distribuidos/02storeDB.py'
+#4
+code: 01mainTuit.py
+where: line/one hundred thirty four-134
+do: Change the PATH for your PATH, something like: 
+	'python3 /home/YourUser/DirectoryWhereYouCloneThisProject/Sistemas-Distribuidos/03dataProcessing.py'
+#5
+code: 02storeDB.py
+where: line/twenty two-22
+do: Change the PATH for your PATH, something like: 
+	'home/YourUser/DirectoryWhereYourCloneThisProject/Sistemas-Distribuidos/tweets/'
+#6
+code: 03dataProcessing.py
+where: line/fifteen-15
+do: Maybe if you're working on a personal computer yoy will have problems with this line because this line
+is for work on a server, so if you're working on a personal computer, just comment the line with: "#".
+If you're working on a server, please DON'T COMMENT THE LINE!!!!!
+#7
+code: 03dataProccesing.py
+where: line/ninety three-93
+do: Change the PATH for your static PATH, for use images in Flask this images need to save in directory 
+"static" where there is otther directory "graphics" (but if you don't have it's ok), so you need to have a line like:
+	'/home/YourUser/MaybeTheSameDirectoryWhereYouCloneThisProject/static/possible_trends.png'
+#8
+code: /www/twitrends.py
+where: line/fourteen-14
+do: Change the PATH for your PATH, something like:
+	'/home/YouUser/DirectoryWhereYouCloneThisProject/Sistemas-Distribuidos/credentialsDB.json'
+
+
+#################### CONFIGURATION - CREDENTIALS #######################
+#credentials.json
+* In the file "credentials.json" you need to put your credentials from twitter API
+#credentialsDB.json
+* In the file "credentialsDB.json" you need to put your IPhost, user, name DB and password DB
+
