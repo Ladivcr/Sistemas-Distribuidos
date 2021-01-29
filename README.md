@@ -2,7 +2,7 @@
 - José Vidal Cardona Rosas 
 
 # Contact information
-- vrosas832@gmail.com
+- ladivcr@comunidad.unam.mx
 
 # Type of licence
 GNU General Public License v3.0
