@@ -1,8 +1,4 @@
 # Twitrends - Identifying possible trends on Twitter - MX
-- José Vidal Cardona Rosas 
-
-# Contact information
-- ladivcr@comunidad.unam.mx
 
 # Type of licence
 GNU General Public License v3.0
